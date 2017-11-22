@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>supplier_test</title>
+</head>
+<body>
+	<ul>
+	{% for supplier in suppliers %}
+		<li> {{ supplier.s_name }} {{ supplier.s_number  }} </li>
+	{% endfor %}
+	</ul>
+</body>
+</html>
