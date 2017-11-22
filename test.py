@@ -212,6 +212,30 @@ def add_product():
 	db.session.commit()
 		
 	return 'product record added successfully'
+@app.route('/fetch_categories')
+def fetch_categories():
+	from database import Product, Stock
+	lst = Product.query.distinct(Product.p_category).all()
+	category_lst = [k.p_category for k in lst]
+	return json.dumps(category_lst)
+
+@app.route('/fetch_sub_categories', methods=['GET'])
+def fetch_sub_categories():
+	category = request.args.get('val')
 	
+	from database import Product, Stock
+	lst = Product.query.filter_by(p_category = category).distinct(Product.p_sub_category).all()
+	category_lst = [k.p_sub_category for k in lst]
+	return json.dumps(category_lst)
+
+@app.route('/fetch_products', methods=['GET'])
+def fetch_products():
+	category = request.args.get('val1')
+	sub_category = request.args.get('val2')
+	
+	from database import Product, Stock
+	lst = Product.query.filter_by(p_category = category).filter_by(p_sub_category = sub_category).all()
+	category_lst = [[k.p_name,k.pid] for k in lst]
+	return json.dumps(category_lst)	
 if __name__ == "__main__":
     app.run()
