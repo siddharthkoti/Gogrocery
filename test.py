@@ -62,7 +62,46 @@ def index():
 @app.route('/signUp')
 def signUp():
     return render_template('ajax_test.html')	
+
+@app.route('/bill_fill')
+def bill_form():
+	return render_template('bill_form.html')
+
+@app.route('/bill_fill_backend', methods = ['POST'])
+def bill_form_backend():
+	from database import Bills, Product, Stock, Customer, Transactions
 	
+	products = request.form.getlist('product[]')	
+	qty = request.form.getlist('qty[]')
+	cost = request.form.getlist('cost[]')
+	cgst = request.form.getlist('cgst[]')
+	sgst = request.form.getlist('sgst[]')
+	total = request.form.getlist('total[]')
+	gst = request.form['gst']
+	
+	length = len(products)
+	bill_amt = sum(map(float, total))
+	
+	c = Customer.query.filter_by(cid = 'NONE').first()
+	c_name = c.c_name
+	
+	
+	
+	bill = Bills(3, length, bill_amt, gst,-1, c_name ,c , 'NONE', 'NONE', 'NONE')
+	for i in range(length):
+		prod = Product.query.filter_by(p_name = products[i]).first()
+		t = Transactions(bill, prod, cost[i],sgst[i],cgst[i], qty[i], total[i]);
+		s = Stock.query.filter_by(pid = prod.pid).first()
+		s.stocks_left = s.stocks_left - int(qty[i])
+		db.session.add(t)
+		db.session.commit()
+		
+	db.session.add(bill)
+	db.session.commit()
+	
+	print(products, qty, cgst, sgst, total)
+	return "success!"
+
 	
 if __name__ == "__main__":
     app.run()
