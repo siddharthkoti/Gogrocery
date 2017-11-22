@@ -181,6 +181,9 @@ def all_suppliers():
 	all_suppliers = Supplier.query.all()
 	return render_template('supplier_test.html', suppliers = all_suppliers)
 
+@app.route('/filter_products')
+def filter_products():
+	return render_template('product_filter.html')
 
 @app.route('/all_products_filter', methods=['POST'])
 def all_products_filter():
