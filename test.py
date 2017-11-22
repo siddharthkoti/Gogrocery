@@ -58,6 +58,11 @@ def index():
 	# This is just for testing
 	all = Test.query.first()
 	return render_template('testing.html',all = all)
+
+@app.route('/signUp')
+def signUp():
+    return render_template('ajax_test.html')	
+	
 	
 if __name__ == "__main__":
     app.run()
