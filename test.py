@@ -102,6 +102,116 @@ def bill_form_backend():
 	print(products, qty, cgst, sgst, total)
 	return "success!"
 
+@app.route('/all_products')
+def all_products():
+	
+	from database import Product
+	all_products = Product.query.all()
+	return render_template('products_test.html', products = all_products)
+
+#@app.route('/all_suppliers', methods=['POST'])	
+@app.route('/all_suppliers')
+def all_suppliers():
+	from database import Supplier
+	
+	all_suppliers = Supplier.query.all()
+	return render_template('supplier_test.html', suppliers = all_suppliers)
+
+
+@app.route('/all_products_filter', methods=['POST'])
+def all_products_filter():
+	stocks_gt = request.form['stock_gt']
+	stocks_lt = request.form['stock_lt']
+	category  = request.form['category']
+	
+	from database import Product, Stock
+	#all_products = Product.query.filter_by().all()
+	all_products = Product.query.all()
+	#.with_entities()
+	if(category == any):
+		q = Product.query
+	else :
+		q = Product.query.filter_by(p_category = category)
+	if( stocks_lt != -1):
+		q = Product.query.join(Stock).filter(Stock.stocks_left <= stocks_lt)
+	if( stocks_gt != -1):
+		q = Product.query.join(Stock).filter(Stock.stocks_left >= stocks_gt)
+	q = q.all()
+	
+	
+	return render_template('filter_test.html', products = q)
+
+@app.route('/add_supplier', methods=['POST'])
+def add_supplier():
+	from database import Supplier, Supplier_product
+	#try:
+	
+		
+	s_name = request.form['name']
+	s_contact_name = request.form['contact']
+	s_number = request.form['mobile_no']
+	s_address = request.form['address']
+	
+	sid = Supplier.query.order_by(desc(Supplier.sid)).limit(1).all()
+	sid = sid[0]
+	sid = sid.sid 
+	prefix = sid[:1]
+	postfix = int(sid[1:])
+	postfix = postfix + 1
+	sid = prefix + str(postfix)
+		
+	#Create a Supplier object to insert into the Supplier table
+	supplier = Supplier(sid, s_name, s_contact_name, s_number, s_address)
+	
+	db.session.add(supplier)
+	db.session.commit()
+		
+	return 'Supplier record added successfully'
+	
+	'''
+	except IntegrityError:
+		db.session.rollback()
+		return "Account already exists.."
+	except:
+		db.session.rollback()
+		return "Cannot register user..."
+	'''
+
+@app.route('/add_product', methods=['POST'])
+def add_product():
+	from database import Product, Supplier, Supplier_product
+	#try:
+	
+	p_category = request.form['category']
+	p_sub_category = request.form['sub_category']
+	p_name = request.form['name']
+	p_price = request.form['price']
+	gst = request.form['gst']
+	product_base_margin = request.form['base_margin']
+	p_sale_price = request.form['sale_price']
+	sid = request.form['suppplier']
+	
+	pid = Product.query.order_by(desc(Product.pid)).limit(1).all()
+	pid = pid[0]
+	pid = pid.pid 
+	prefix = pid[:1]
+	postfix = int(pid[1:])
+	postfix = postfix + 1
+	pid = prefix + str(postfix)
+		
+	#Create a product object to insert into the Product table
+	product = Product(pid, p_category, p_sub_category, p_name, p_price,product_base_margin, p_sale_price, sid)
+	
+	#get supplier obj from database 
+	supp = Supplier.query.filter_by(sid = sid).first()
+	supplier_product = Supplier_product( product, supp)
+	
+	db.session.add(product)
+	db.session.add(supplier_product)
+	
+	db.session.commit()
+		
+	return 'product record added successfully'
 	
 if __name__ == "__main__":
     app.run()
