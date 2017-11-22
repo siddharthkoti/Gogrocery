@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript" src="static/js/product_filter.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+</head>
+<body onload="fetch1()">
+<form role="form">
+<label>Stock Greater than:<input type="text" name="stock_gt" id="stock_gt"/></label></br></br>
+<label>Stock Lesser than:<input type="text" name="stock_lt" id="stock_lt"/></label></br></br>
+<label>Category:<select id="category" name="category"></select></label></br></br>
+
+</form>
+<button onclick="fetch()" value="fetch" id="fetch">FEtCh</button>
+<table id="into"></table>
+
+</body>
+
+</html>
