@@ -1,0 +1,39 @@
+.navbar-bg-gray{
+	font-size:14px;
+	height:70;
+	background-color: rgba(83, 81, 81, 1);
+	margin:0;
+	border-radius:0;
+}
+.navbar-align-center{
+	margin: 7.5px 0 7.5px 35% !important;
+	font-family:Arial Narrow;
+	
+}
+
+.navbar-nav  > li >a {
+	color: white !important;
+}
+
+div.container-fluid > ul >li > a{
+	background-color: rgba(83, 81, 81, 1)!important;
+	font-size:15px;	
+	transition: color 0.4s ease 0s;
+}
+
+div.container-fluid > ul >li > a:hover{
+	color:#A69374 !important;
+}
+
+div.container-fluid > ul >li{
+	margin:0 7px 0 7px;
+}
+
+li.active-tab > a{
+	color:#A69374 !important;
+}
+
+.navbar-inverse{
+	background-color:  rgba(83, 81, 81, 1)!important;
+	
+}
