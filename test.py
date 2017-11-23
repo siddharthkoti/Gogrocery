@@ -56,35 +56,68 @@ INSERT INTO test (id,username,age,email) VALUES (10, 'Teddy', 23, 'Teddy@bear.co
 @app.route('/')
 def index():
 	# This is just for testing
-	if 'username' in session:
-		username = session['username']
-		return 'Logged in as ' + username +"<br /><b><a href='/logout'>click here to log out</a></b>"
-	return "You are not logged in <br><a href='/login'><b>click here to log in</b></a>"
-	#return render_template('testing.html',all = all)
+	# if 'username' in session:
+		# username = session['username']
+		# return 'Logged in as ' + username +"<br /><b><a href='/logout'>click here to log out</a></b>"
+	# return "You are not logged in <br><a href='/login'><b>click here to log in</b></a>"
+	return render_template('login.html')
 
-@app.route('/login',  methods=['GET', 'POST'])
+@app.route('/login',  methods=['POST'])
 def login():
-	if request.method == 'POST':
-		session['username'] = request.form['username']
+	
+	username = request.form['username']
+	password = request.form['password']
+	
+	from database import Admin
+	obj = Admin.query.filter(and_(Admin.username == username, Admin.password == password)).first()
+	
+	if obj != None:
+		session['user'] = username
+		return redirect(url_for('home'))
+	else:
+		claim = "Wrong Username or Password!!"
 		return redirect(url_for('index'))
-	return '''
-			<form action="" method="post">
-			<p><input type=text name=username>
-			<p><input type=submit value=Login>
-			</form>
-			'''
+	
 
 @app.route('/logout')
 def logout():
 	# remove the username from the session if it is there
-	session.pop('username', None)
+	session.pop('user', None)
 	return redirect(url_for('index'))			
 			
+
+@app.route('/home')
+def home():
+	# remove the username from the session if it is there
+	#session.pop('username', None)
+	if 'user' in session:
+		username = session['user']
+	return "Successfully Loged in as " + username
+
+	
 			
 @app.route('/signUp')
 def signUp():
     return render_template('ajax_test.html')
 
+@app.route('/add_user', methods=['POST'])
+def add_user():
+	if 'user' in session:
+		if session['user'] == 'Admin' :
+			
+			from database import Admin
+			
+			username = request.form['username']
+			password = request.form['password']
+			user = Admin(username, password)
+			db.session.add(user)
+			db.session.commit()
+			return "New User named" + username + "and with password " + password + "successfully created!"
+		else :
+			return "You are not an Admin and so you can't Add a new User! Sorry!"
+	else:
+		return redirect(url_for('index'))
+	
 @app.route('/select')
 def select_test():
     return render_template('select.html')	
