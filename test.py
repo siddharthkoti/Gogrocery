@@ -231,14 +231,17 @@ def all_products_filter():
 	#.with_entities()
 	
 
-	if(category == any):
+	if(category == 'ANY'):
 		q = Product.query
 	else :
 		q = Product.query.filter_by(p_category = category)
-	if( stocks_lt != -1):
-		q = q.join(Stock).filter(Stock.stocks_left <= stocks_lt)
-	if( stocks_gt != -1):
+	if( stocks_gt != '-1'):
 		q = q.join(Stock).filter(Stock.stocks_left >= stocks_gt)
+	else:
+		q = q.join(Stock)
+	if( stocks_lt != '-1'):
+		q = q.filter(Stock.stocks_left <= stocks_lt)
+		
 	q = q.with_entities(Product, Stock).all()
 	
 	products = {k[0].pid:[k[0].p_name, k[0].p_category, k[0].p_sub_category, k[0].p_price, k[0].gst, k[1].stocks_left] for k in q}

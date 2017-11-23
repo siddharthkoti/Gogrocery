@@ -6,7 +6,7 @@ function fetch1(){
 			success: function(response){
 				//console.log(response.list_of_data); //	IF using the jasonify
 				console.log(response); //if using json.dumps({object})
-				var s = "";
+				var s = "<option>ANY</option>";
 				var response = JSON.parse(response);
 				for(var i =0;i < response.length;i++){
 					s += "<option>" + response[i] + "</option>";
