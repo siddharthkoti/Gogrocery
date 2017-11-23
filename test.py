@@ -9,7 +9,7 @@ from sqlalchemy import desc, and_, or_, func
 from sqlalchemy.exc import IntegrityError
 from settings import db,app
 from datetime import date
-
+import datetime
 # app = Flask(__name__)
 # db = SQLAlchemy(app)
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -191,18 +191,21 @@ def all_products_filter():
 	stocks_lt = request.form['stock_lt']
 	category  = request.form['category']
 	
+	print(stocks_gt, stocks_lt, category)
 	from database import Product, Stock
 	#all_products = Product.query.filter_by().all()
 	all_products = Product.query.all()
 	#.with_entities()
+	
+
 	if(category == any):
 		q = Product.query
 	else :
 		q = Product.query.filter_by(p_category = category)
 	if( stocks_lt != -1):
-		q = Product.query.join(Stock).filter(Stock.stocks_left <= stocks_lt)
+		q = q.join(Stock).filter(Stock.stocks_left <= stocks_lt)
 	if( stocks_gt != -1):
-		q = Product.query.join(Stock).filter(Stock.stocks_left >= stocks_gt)
+		q = q.join(Stock).filter(Stock.stocks_left >= stocks_gt)
 	q = q.with_entities(Product, Stock).all()
 	
 	products = {k[0].pid:[k[0].p_name, k[0].p_category, k[0].p_sub_category, k[0].p_price, k[0].gst, k[1].stocks_left] for k in q}
@@ -360,7 +363,7 @@ def get_details_of_bill():
 def get_sales(sales):
 	
 	from database import Transactions, Product, Bills
-	import datetime
+	
 	
 	if sales == 'monthly' :
 		sales = 30
@@ -408,12 +411,28 @@ def get_sales(sales):
 	#mid.with_entities(Product.p_category, func.sum(Transactions.quantity)).group_by(Product.p_category).all()
 	return render_template('monthly_sales.html',p = products, m = m, start_date = start_date,end_date = end_date, categories = categories, sub_categories = sub_categories)
 
+@app.route('/get_tax_details_to_file')#, methods=['GET'])
+def get_tax_details_to_file():
+	from database import Bills, TaxesFiled
+	
+	last_filled = TaxesFiled.query.order_by(desc(TaxesFiled.id)).limit(1).first()
+	last_filled_date = last_filled.end
+	
+	#Tax collected after the last filled date
+	end_date = datetime.date.today() + datetime.timedelta(-1)
+	bills = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= last_filled_date).all()
+	
+	
+	last_filled_date = last_filled_date + datetime.timedelta(1)
+	return render_template('details_of_tax.html',last_filled = last_filled, bills = bills, last_filled_date = last_filled_date)
+	
+	
 @app.route('/file_taxes')#, methods=['GET'])
 def file_taxes():
 	from database import Bills, TaxesFiled
 	
 	start_date = datetime.date.today() + datetime.timedelta(-365)
-	end_date = datetime.date.today()
+	end_date = datetime.date.today() + datetime.timedelta(-1)
 	q = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= start_date).all()
 	gst_list = [i.gst for i in q]
 	
@@ -434,6 +453,10 @@ def file_taxes():
 	
 	db.session.add(tax)
 	db.session.commit()
+	
+	return "Success"
+
+	
 	
 if __name__ == "__main__":
     app.run()
