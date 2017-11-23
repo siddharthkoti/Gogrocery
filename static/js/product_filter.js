@@ -33,7 +33,7 @@ function fetch(){
 				console.log(response); //if using json.dumps({object})
 				var obj = JSON.parse(response);
 				console.log(obj);
-				var s = "";
+				var s = "<tr><th>Product</th><th>Category</th><th>Sub Category</th><th>Price</th><th>GST</th><th>Stock</th></tr>";
 				for(var key in obj){
 					s += "<tr><td>" + obj[key][0] + "</td><td>" + obj[key][1] +  "</td><td>" + obj[key][2]  + "</td><td>" + obj[key][3] +  "</td><td>" + obj[key][4]  + "</td><td>" + obj[key][5]+ "</td></tr>";
 				}
