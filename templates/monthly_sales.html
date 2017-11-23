@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link href="../static/css/pie_chart/dist/css/vendor/normalize.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="../static/css/pie_chart/dist/css/vendor/foundation.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="../static/css/pie_chart/dist/css/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+  <script src="../static/js/pie_chart/dist/js/vendor/modernizr.js"></script>
+
+	<title>monthly_sales_test</title>
+</head>
+<body>
+	<div>Monthly Sales:</div>
+	<div>Date : {{ start_date }} to {{ end_date }}</div>
+	<table>
+		<tr><td>Item</td><td>Total Quantity Sold</td><td>price</td> <td>Total</td></tr>
+
+
+	
+		{% for i in p %}
+			<tr><td>{{ p[i][0] }}</td><td> {{ p[i][1] }}</td><td>{{ m[i] }}</td> <td> {{ p[i][1]*m[i] }}</td></tr>
+		{% endfor %}
+
+	</table>
+
+	<div class="row">
+    <div class="large-12 columns" >
+      	<h3>Graphs</h3>
+
+
+    </div>
+
+  <div class="row"> 
+    
+     <table>
+     	<tr>
+     <div class="large-2 small-2 columns">
+     <td>
+     	<h4> Sub Categories</h4>
+      <ul data-pie-id="pie">
+
+      	{% for data in sub_categories %}
+
+        <li data-value= "{{ data[1] }}" > {{ data[0] }}</li>
+
+
+		{% endfor %}
+
+      </ul>
+  	</td>
+      
+      <!-- <li data-value="32" data-text="Goats {{percent}} ({{value}} total)">Goat (32)</li> -->
+  
+    </div>
+    <td width="500px" height="300px">
+	    <div class="large-10 small-8 columns">
+	      <div id="pie"></div>
+	    </div>
+	</td>
+	</tr>
+	<tr>
+     <div class="large-2 small-2 columns">
+     <td>
+     	<h4>Categories</h4>
+      <ul data-pie-id="pie2">
+
+      	{% for data in categories %}
+
+        <li data-value= "{{ data[1] }}" > {{ data[0] }}</li>
+
+
+		{% endfor %}
+
+      </ul>
+  	</td>
+      
+      <!-- <li data-value="32" data-text="Goats {{percent}} ({{value}} total)">Goat (32)</li> -->
+  
+    </div>
+    <td width="500px" height="300px">
+	    <div class="large-10 small-8 columns">
+	      <div id="pie2"></div>
+	    </div>
+	</td>
+	</tr>
+    </table>
+  </div>
+	
+	
+	<script src="../static/js/pie_chart/dist/js/vendor/dependencies.js"></script>
+  <script src="../static/js/pie_chart/dist/js/pizza.js"></script>
+  <script>
+    $(window).load(function() {
+      Pizza.init();
+      // $(document).foundation();
+    });
+  </script>
+</body>
+</html>
