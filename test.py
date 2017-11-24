@@ -218,6 +218,10 @@ def all_suppliers():
 def filter_products():
 	return render_template('product_filter.html')
 
+@app.route('/dashboard')
+def dashboard():
+	return render_template('dashboard.html')
+
 @app.route('/all_products_filter', methods=['POST'])
 def all_products_filter():
 	stocks_gt = request.form['stock_gt']
