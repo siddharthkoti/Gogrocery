@@ -13,6 +13,8 @@
 		<tr><td>Total Amount Filed :</td><td>{{ last_filled.total_amt }}</td></tr>
 
 	</table>
+
+	<div>Details of Bills from last Tax Filation Date which will be taken for next Filation: </div>
 	<table>
 		<tr><td>Bill No</td><td>Bill date</td> <td>Bill Amount</td> <td>GST Collected</td></tr>
 		{% for bill in bills %}	
@@ -20,7 +22,7 @@
 		{% endfor %}
 
 
-
+		
 	</table>
 	
 

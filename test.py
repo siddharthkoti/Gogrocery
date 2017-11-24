@@ -496,7 +496,13 @@ def file_taxes():
 	
 	return "Success"
 
-	
+@app.route('/add_user_request', methods=['GET'])
+def add_user_request():
+	if 'user' in session and session['user'] == 'Admin':
+		return "user added"
+		#to be completed
+	else:
+		return "you aren't allowed to Add any user since you are not the Admin"
 	
 if __name__ == "__main__":
     app.run()
