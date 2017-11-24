@@ -2,6 +2,3 @@ activate virtual envi
 - venv\scripts\activate
 
 
-create databases - go to terminal and type python
-- from app	import db
- db.create_all()
