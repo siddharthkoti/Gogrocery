@@ -520,7 +520,7 @@ def add_user_request():
 		return "new user "+ Username +"added Successfully"
 		#to be completed
 	else:
-		return return render_template('add_new_user_fail.html')
+		return render_template('add_new_user_fail.html')
 
 if __name__ == "__main__":
     app.run()
