@@ -2,7 +2,7 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
-	
+	<script src="static/js/w3.js"></script>
 </head>
 <body>
     <form method="post" action="/post_user">

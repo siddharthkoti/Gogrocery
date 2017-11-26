@@ -2,7 +2,7 @@
 <html>
 <head>
 	<style>
-	#cont .container {
+	#cont {
     width: 300px;
     border: 4px solid grey;
     box-sizing: border-box;
@@ -17,7 +17,7 @@
   <script src="static/js/w3.js"></script>
 </head>
 <body>
-<div w3-include-html={{ url_for('header') }} ></div>
+<div w3-include-html={{ url_for('header') }}></div>
 	<div class="container" id="cont">
 	<div class="col-sm-12"><h1 class="text-muted">Bill No: {{ bill.bill_no }} | Bill Date {{ bill.bill_date}}</h1> </div>
 	<div class="col-sm-12"><h3 class="text-muted">Bill Details: </h3></div>
