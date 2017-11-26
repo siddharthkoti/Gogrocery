@@ -68,6 +68,9 @@ def login():
 	username = request.form['username']
 	password = request.form['password']
 	
+	if 'user' in session:
+		session.pop('user', None)
+	
 	from database import Admin
 	obj = Admin.query.filter(and_(Admin.username == username, Admin.password == password)).first()
 	
@@ -496,13 +499,28 @@ def file_taxes():
 	
 	return "Success"
 
-@app.route('/add_user_request', methods=['GET'])
+@app.route('/add_user_page')
+def add_user_page():
+	if 'user' in session and session['user'] == 'Admin':
+		return render_template('add_new_user_page.html')
+	else: 
+		return render_template('add_new_user_fail.html')
+
+@app.route('/add_user_request', methods=['POST'])
 def add_user_request():
 	if 'user' in session and session['user'] == 'Admin':
-		return "user added"
+		from database import Admin
+		username = request.form['username']
+		password = request.form['password']
+		
+		new_user = Admin(username, password)
+		db.session.add(new_user)
+		db.session.commit()
+		
+		return "new user "+ Username +"added Successfully"
 		#to be completed
 	else:
-		return "you aren't allowed to Add any user since you are not the Admin"
-	
+		return return render_template('add_new_user_fail.html')
+
 if __name__ == "__main__":
     app.run()
