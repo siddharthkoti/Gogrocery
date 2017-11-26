@@ -16,7 +16,7 @@
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-		<li><a href="{{url_for('add_user_page')}}"><span class="glyphicon glyphicon-plus"></span> Add User</a></li>
+		<li><a href="{{url_for('add_user')}}"><span class="glyphicon glyphicon-plus"></span> Add User</a></li>
         <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
