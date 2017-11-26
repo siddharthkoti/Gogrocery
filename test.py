@@ -88,17 +88,6 @@ def logout():
 	session.pop('user', None)
 	return redirect(url_for('index'))			
 			
-
-@app.route('/home')
-def home():
-	# remove the username from the session if it is there
-	#session.pop('username', None)
-	if 'user' in session:
-		username = session['user']
-	return "Successfully Loged in as " + username
-
-	
-			
 @app.route('/signUp')
 def signUp():
     return render_template('ajax_test.html')
