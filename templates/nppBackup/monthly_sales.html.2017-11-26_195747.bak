@@ -20,7 +20,7 @@
 <div w3-include-html={{ url_for('header') }}></div>
 	<div class="inner_content_w3_agile_info two_in">
 		<h2 class="w3_inner_tittle" style="color:#fff"></h2>
-		<input type = "button" onclick="location.href='';" name="week" class = "btn btn-success"  value="Weekly Sales"></input>
+		<input type = "button" onclick="calc(event)" name="week" class = "btn btn-success"  value="Weekly Sales"></input>
 		<input type = "button" onclick="calc(event)" name="month" class = "btn btn-success"  value="Monthly Sales"></input>
 		<input type = "button" onclick="calc(event)" name="year" class = "btn btn-success"  value="Yearly Sales"></input>
 			<div class="forms-main_agileits">
