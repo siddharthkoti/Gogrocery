@@ -76,7 +76,7 @@ def login():
 	
 	if obj != None:
 		session['user'] = username
-		return redirect(url_for('home'))
+		return redirect(url_for('dashboard'))
 	else:
 		claim = "Wrong Username or Password!!"
 		return redirect(url_for('index'))
@@ -125,6 +125,13 @@ def add_user():
 def select_test():
     return render_template('select.html')	
 
+@app.route('/header')
+def header():
+    return render_template('header.html')	
+
+@app.route('/footer')
+def footer():
+    return render_template('footer.html')
 	
 
 	
