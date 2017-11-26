@@ -126,6 +126,8 @@ def select_test():
     return render_template('select.html')	
 
 	
+
+	
 @app.route('/signUpUser', methods=['POST'])
 def signUpUser():
 	#To register a user/admin 
