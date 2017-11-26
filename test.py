@@ -76,7 +76,7 @@ def login():
 	
 	if obj != None:
 		session['user'] = username
-		return redirect(url_for('home'))
+		return redirect(url_for('dashboard'))
 	else:
 		claim = "Wrong Username or Password!!"
 		return redirect(url_for('index'))
