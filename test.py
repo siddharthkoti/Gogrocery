@@ -133,7 +133,6 @@ def header():
 def footer():
     return render_template('footer.html')
 	
-
 	
 @app.route('/signUpUser', methods=['POST'])
 def signUpUser():
