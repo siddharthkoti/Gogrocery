@@ -514,7 +514,7 @@ def add_user_request():
 		db.session.add(new_user)
 		db.session.commit()
 		
-		return "new user "+ Username +"added Successfully"
+		return "new user "+ username +"added Successfully"
 		#to be completed
 	else:
 		return render_template('add_new_user_fail.html')
