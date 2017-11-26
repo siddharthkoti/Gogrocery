@@ -50,7 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												<div class="signin-form profile admin">
 													<h2>Login</h2>
 													<div class="login-form">
-														<form action="login.php" method="post" >
+														<form action="{{ url_for('login') }}" method="post" >
 															<input type="text" name="username" placeholder="username" required="">
 															<input type="password" name="password"  placeholder="Password" required="">
 															<div class="tp">
