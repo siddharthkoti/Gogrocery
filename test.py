@@ -125,6 +125,13 @@ def add_user():
 def select_test():
     return render_template('select.html')	
 
+@app.route('/header')
+def header():
+    return render_template('header.html')	
+
+@app.route('/footer')
+def footer():
+    return render_template('footer.html')
 	
 @app.route('/signUpUser', methods=['POST'])
 def signUpUser():
