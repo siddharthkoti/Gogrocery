@@ -41,7 +41,7 @@
 		</div>
 		<input type="hidden" value="" name="supplier" id="supplier"/>
 		<div class="form-group">
-		<input class="btn btn-dark" style="position:absolute;right:460px;" type="submit" value="ADD PRODUCT">
+		<input class="btn btn-dark" style="position:absolute;right:460px;" type="submit" value="ADD SUPPLIER">
 		</form>
 		</br></br></br>
 		
