@@ -177,7 +177,7 @@ def bill_form_backend():
 	db.session.commit()
 	
 	print(products, qty, cgst, sgst, total)
-	return "success!" #to be updated without fail tomoro
+	return "success!" #to be updated without fail tomoro	
 	
 
 @app.route('/get_list_of_products', methods=['GET'])
