@@ -27,7 +27,7 @@
 		<input type="submit" class="btn btn-dark" style="position:absolute;right:460px;" value="ADD SUPPLIER">
 		</div>
 	</form>
-	</br></br>
+	
 		<div w3-include-html={{ url_for('footer') }}></div>
 		<script>
 		w3.includeHTML();
