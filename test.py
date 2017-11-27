@@ -212,7 +212,8 @@ def all_suppliers():
 	from database import Supplier
 	
 	all_suppliers = Supplier.query.all()
-	return render_template('supplier_test.html', suppliers = all_suppliers)
+	filtered_list = {k.s_name : [k.sid, k.s_contact_name, k.s_number] for k in all_suppliers}
+	return json.dumps(filtered_list)
 
 @app.route('/filter_products')
 def filter_products():
