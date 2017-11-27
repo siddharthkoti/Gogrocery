@@ -1,0 +1,30 @@
+report 
+test cases 
+html pages for some functions
+	to be made afresh:
+		add_supplier -- done
+		add_product -- done (css remaining)
+		file_taxes  
+		add_user_request -- 
+		
+	to be updated:
+		products_test.html - done
+		supplier_test - ajax - done
+		get_bills -- fe
+ 		add_new_user_fail 
+		
+update stock functionality
+change header
+Bill details page - backend to be made generic
+Gst filing integration
+add products to supplier
+add new supplier
+footer text
+result of billing --develop a web page 
+
+
+reviews for other's reports
+
+details of SE in proj
+
+shivaniv27@yahoo.co.in
