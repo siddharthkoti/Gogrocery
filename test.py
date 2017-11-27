@@ -392,13 +392,18 @@ def get_bills():
 	print(bills)
 	return "success"
 
-@app.route('/get_details_of_bill')#, methods=['GET'])		
+@app.route('/search_by_bill_id')
+def search_by_bill_id():
+	return render_template('search_by_bill_id.html')
+
+
+@app.route('/get_details_of_bill', methods=['POST'])		
 def get_details_of_bill():	
 	
 	#Gets details of the bill, i.e its products and cost of each product and quantity
 	
-	#bill_no = request.form['bill_id']
-	bill_no = 2
+	bill_no = request.form['bill_id']
+	# bill_no = 2
 	from database import Transactions, Product, Bills
 	
 	#q = Transactions.query.join(Product).filter(and_(Product.pid = Transactions.pid,Transactions.bill_no == bill_no)).all()
