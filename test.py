@@ -570,7 +570,7 @@ def get_tax_details_to_file():
 def file_taxes():
 	from database import Bills, TaxesFiled
 	
-	start_date = datetime.date.today() + datetime.timedelta(-365)
+	start_date = datetime.date.today() + datetime.timedelta(-366)
 	end_date = datetime.date.today() + datetime.timedelta(-1)
 	q = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= start_date).all()
 	gst_list = [i.gst for i in q]
