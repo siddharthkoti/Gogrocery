@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Product page</title>
+</head>
+<body>
+	<form action="{{url_for('add_product') }}" method="POST">
+		<label> Category<input type="text" name="category" /></label>
+		<label>Sub Category<input type="text" name="sub_category" /></label>
+		<label>Name<input type="text" name="name" /></label>
+		<label> Price<input type="text" name="price" /></label>
+		<label>GST<input type="text" name="gst" /></label>
+		<label>Base Margin<input type="text" name="base_margin" /></label>
+		<label>Sale Price<input type="text" name="sale_price" /></label>
+		<label> Suppplier<input type="text" name="suppplier" /></label>
+		<input type="submit" value="ADD SUPPLIER">
+
+	</form>
+</body>
+</html>

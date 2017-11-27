@@ -12,9 +12,8 @@
    </script>
 </head>
 <body onload="fetch1()">
+		<form role="form" action= "{{ url_for('add_product')}}" method="POST"  >
 		<div w3-include-html={{ url_for('header') }} ></div>
-		<form role="form" action= "{{ url_for('add_product')}}" method="POST">
-		
 		<div class="form-group">
 		<label class="col-xs-3 control-label"> Category</label><div class="col-xs-5 selectContainer"><select name="category" id="category" class="form-control" onchange="fetch2()"></select></div></br></br>
 		</div>
@@ -22,7 +21,7 @@
 		<label class="col-xs-3 control-label">Sub Category</label><div class="col-xs-5 selectContainer"><select name="sub_category" class="form-control" id="sub_category" onchange="fetch3()"></select></div></br></br>
 		</div>
 		<div class="form-group">
-		<label class="col-xs-3 control-label">Product Name</label><div class="col-xs-5 selectContainer"><input class="form-control" type="text" name="name" /></div></br></br>
+		<label class="col-xs-3 control-label">Name</label><div class="col-xs-5 selectContainer"><input class="form-control" type="text" name="name" /></div></br></br>
 		</div>
 		<div class="form-group">
 		<label class="col-xs-3 control-label"> Price</label><div class="col-xs-5 selectContainer"><input class="form-control" type="text" name="price" /></div></br></br>
@@ -42,9 +41,7 @@
 		<input type="hidden" value="" name="supplier" id="supplier"/>
 		<div class="form-group">
 		<input class="btn btn-dark" style="position:absolute;right:460px;" type="submit" value="ADD SUPPLIER">
-		</form>
-		</br></br></br>
-		
+		</form></br></br></br>
 		<div w3-include-html={{ url_for('footer') }}></div>
 		<script>
 		w3.includeHTML();
