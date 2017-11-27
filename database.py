@@ -45,12 +45,12 @@ class Supplier(db.Model):
 	ref_from_stock_for_sid = db.relationship('Stock', backref = 'supplier', passive_deletes=True)
 	ref_from_supplier_product_for_sid = db.relationship('Supplier_product' , backref = 'supplier', passive_deletes=True)
 	
-	def __init__(self, sid, s_name, s_contact_name, s_number, s_adddress):
+	def __init__(self, sid, s_name, s_contact_name, s_number, s_address):
 		self.sid = sid
 		self.s_name = s_name
 		self.s_contact_name = s_contact_name
 		self.s_number = s_number
-		self.s_adddress = s_adddress
+		self.s_address = s_address
 		#self.product = product #this is the product object which has to be passed so that foriegn key relationship is established
 		#self.product_category = product_category
 		#self.cost_price = cost_price
@@ -178,5 +178,18 @@ class Supplier_product(db.Model):
 	def __init__(self, product, supplier):
 		self.product = product
 		self.supplier = supplier
-
+		
+class TaxesFiled(db.Model):
+	id = db.Column(db.Integer, primary_key = True)
+	start =  db.Column(db.Date)
+	end = db.Column(db.Date)
+	
+	total_amt = db.Column(db.Integer)
+	
+	
+	def __init__(self, start, end, total_amt):
+		self.start  = start
+		self.end = end
+		self.total_amt = total_amt
+	
 db.create_all()

@@ -252,6 +252,11 @@ def all_products_filter():
 	
 	#return render_template('filter_test.html', products = q)	
 	return json.dumps(products)
+
+
+@app.route('/add_supplier_page')
+def add_supplier_page():
+	return render_template('add_supplier_page.html')
 	
 @app.route('/add_supplier', methods=['POST'])
 def add_supplier():
@@ -289,6 +294,10 @@ def add_supplier():
 		return "Cannot register user..."
 	'''
 
+@app.route('/add_product_page')
+def add_product_page():
+	return render_template('add_product_page.html')
+	
 @app.route('/add_product', methods=['POST'])
 def add_product():
 	from database import Product, Supplier, Supplier_product
