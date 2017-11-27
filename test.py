@@ -406,7 +406,7 @@ def get_sales():
 	
 	
 		
-	#-------------------------------------------------
+	#-------------------------------------------------------------------------------------------------------------
 	#monthly
 	sales = 30
 	start_date = datetime.date.today() + datetime.timedelta(-sales)
@@ -427,7 +427,29 @@ def get_sales():
 	m1 = {i[0]: i[1] for i in m}
 	#op: {'p3' : 30, 'p2': 10}
 	
-	
+	amount_list_per_day = []
+	quantity_list_per_day = []
+	for i in range(30):
+		date = datetime.date.today() + datetime.timedelta(-i)
+		half = Bills.query.filter(Bills.bill_date == date)#.all()
+		bills = half.all()
+		list_bill_no = [i.bill_no for i in bills]
+		amt = half.with_entities(func.sum(Bills.bill_amt)).group_by(Bills.bill_date).first() #op:(1125,)
+		if amt == None:
+			amt = 0
+		else:
+			amt = amt[0]
+		amount_list_per_day.append(amt)
+		
+		if len(list_bill_no) == 0:
+			quantity_list_per_day.append(0)
+		else:
+			quantity = Transactions.query.filter(Transactions.bill_no.in_(list_bill_no)).with_entities(func.sum(Transactions.quantity)).group_by(Transactions.bill_no).all()
+			total_q = 0
+			for i in quantity:
+				total_q += i[0]
+			quantity_list_per_day.append(total_q)
+		
 	#yearly
 	sales = 365
 	start_date = datetime.date.today() + datetime.timedelta(-sales)
@@ -448,6 +470,37 @@ def get_sales():
 	m = Product.query.filter(Product.pid.in_(pids)).with_entities(Product.pid, Product.p_price).all()
 	m2 = {i[0]: i[1] for i in m}
 	#op: {'p3' : 30, 'p2': 10}
+	
+	amount_list_per_month = []
+	quantity_list_per_month = []
+	
+	for i in range(12):
+		j = i*30
+		k = (i+1)*30
+		end_date = datetime.date.today() + datetime.timedelta(-j)
+		start_date = datetime.date.today() + datetime.timedelta(-k)
+		half = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= start_date)
+				
+		bills = half.all()
+		list_bill_no = [i.bill_no for i in bills]
+		amt = half.with_entities(func.sum(Bills.bill_amt)).group_by(Bills.bill_date).all() #op:(1125,)
+		if len(amt) == 0:
+			amt_t = 0
+		else:
+			amt_t = 0
+			for i in amt:
+				amt_t += i[0]
+		amount_list_per_month.append(amt_t)
+		
+		if len(list_bill_no) == 0:
+			quantity_list_per_month.append(0)
+		else:
+			quantity = Transactions.query.filter(Transactions.bill_no.in_(list_bill_no)).with_entities(func.sum(Transactions.quantity)).group_by(Transactions.bill_no).all()
+			total_q = 0
+			for i in quantity:
+				total_q += i[0]
+			quantity_list_per_month.append(total_q)
+	
 	
 	#weekly
 	sales = 7
@@ -485,7 +538,7 @@ def get_sales():
 	categories = mid.with_entities(Product.p_category, func.sum(Transactions.quantity)).group_by(Product.p_category).all()
 	
 	#mid.with_entities(Product.p_category, func.sum(Transactions.quantity)).group_by(Product.p_category).all()
-	return render_template('sales_summary.html',monthly = monthly, yearly = yearly , weekly= weekly, m1 = m1,m2 = m2,m3 = m3)#, start_date = start_date,end_date = end_date, categories = categories, sub_categories = sub_categories)
+	return render_template('sales_summary.html',monthly = monthly, yearly = yearly , weekly= weekly, m1 = m1, m2 = m2, m3 = m3, amount_list_per_day = amount_list_per_day, quantity_list_per_day = quantity_list_per_day, quantity_list_per_month = quantity_list_per_month, amount_list_per_month = amount_list_per_month, end_date = end_date)#, start_date = start_date,end_date = end_date, categories = categories, sub_categories = sub_categories)
 
 @app.route('/get_tax_details_to_file')#, methods=['GET'])
 def get_tax_details_to_file():
