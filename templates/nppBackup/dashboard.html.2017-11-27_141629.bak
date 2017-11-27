@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/dashboard.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="static/js/w3.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+
+<div w3-include-html={{ url_for('header') }}></div>
+
+<div class="container-fluid bg-3 text-center">    
+  <h3></h3><br>
+  <div class="row">
+    <div class="col-sm-3">
+	
+	  <div class="hovereffect img-hover">
+	 
+	  
+       <img src="/static/img/invoice2.jpg" class="img-responsive img-rounded" style="width:100%;height:170px" alt="Image">
+		<div class="overlay">
+               <a href="{{ url_for('get_details_of_bill') }}"><h2>Bill Details</h2></a>
+               <p class="info">Our sleek quality work and  synergized effect of our team’s creative mind have paved the way for offering innovative services to our clients.
+               <a href="#">read more</a></p>
+            </div>
+			
+		</div>
+	</div>
+    <div class="col-sm-3"> 
+	
+	  <div class="hovereffect img-hover">
+       <img src="/static/img/invoice4.jpeg" class="img-responsive img-rounded" style="width:100%;height:170px" alt="Image">
+	   <div class="overlay">
+               <a href="{{ url_for('bill_form') }}"><h2>Bill Form</h2></a>
+               <p class="info">Our sleek quality work and  synergized effect of our team’s creative mind have paved the way for offering innovative services to our clients.
+               <a href="#">read more</a></p>
+            </div>
+	  </div>
+    </div>
+    <div class="col-sm-3"> 
+	
+	  <div class="hovereffect img-hover">
+       <img src="/static/img/product1.jpeg" class="img-responsive img-rounded" style="width:100%;height:170px" alt="Image">
+	  <div class="overlay">
+               <a href="{{ url_for('filter_products') }}"><h2>Filter Products</h2></a>
+               <p class="info">Our sleek quality work and  synergized effect of our team’s creative mind have paved the way for offering innovative services to our clients.
+               <a href="#">read more</a></p>
+            </div>
+	  </div>
+    </div>
+    <div class="col-sm-3">
+	
+	  <div class="hovereffect img-hover">
+       <img src="/static/img/stat1.jpg" class="img-responsive img-rounded" style="width:100%;height:170px" alt="Image">
+	  <div class="overlay">
+               <a href="{{ url_for('get_sales',sales = 'monthly') }}"><h2>Sales Stat</h2></a>
+               <p class="info">Our sleek quality work and  synergized effect of our team’s creative mind have paved the way for offering innovative services to our clients.
+               <a href="#">read more</a></p>
+            </div>
+	  </div>
+    </div>
+  </div>
+</div><br>
+
+<div class="container-fluid bg-3 text-center">    
+  <div class="row">
+    <div class="col-sm-3">
+	
+	  <div class="hovereffect img-hover">
+       <img src="/static/img/product.jpg" class="img-responsive img-rounded" style="width:100%;height:170px" alt="Image">
+	  <div class="overlay">
+               <a href="{{ url_for('select_test') }}"><h2>Add products to Supplier</h2></a>
+               <p class="info">Our sleek quality work and  synergized effect of our team’s creative mind have paved the way for offering innovative services to our clients.
+               <a href="#">read more</a></p>
+            </div>
+	  </div>
+	  </div>
+    <div class="col-sm-3">
+	
+	  <div class="hovereffect img-hover">
+       <img src="/static/img/product.jpg" class="img-responsive img-rounded" style="width:100%;height:170px" alt="Image">
+	  <div class="overlay">
+               <a href="{{ url_for('select_test') }}"><h2>Add products to Supplier</h2></a>
+               <p class="info">Our sleek quality work and  synergized effect of our team’s creative mind have paved the way for offering innovative services to our clients.
+               <a href="#">read more</a></p>
+            </div>
+	  </div>
+	  </div>
+    <div class="col-sm-3">
+	
+	  <div class="hovereffect img-hover">
+       <img src="/static/img/product.jpg" class="img-responsive img-rounded" style="width:100%;height:170px" alt="Image">
+	  <div class="overlay">
+               <a href="{{ url_for('select_test') }}"><h2>Add products to Supplier</h2></a>
+               <p class="info">Our sleek quality work and  synergized effect of our team’s creative mind have paved the way for offering innovative services to our clients.
+               <a href="#">read more</a></p>
+            </div>
+	  </div>
+	  
+	  </div>
+    <div class="col-sm-3">
+	
+	  <div class="hovereffect img-hover">
+       <img src="/static/img/product.jpg" class="img-responsive img-rounded" style="width:100%;height:170px" alt="Image">
+	  <div class="overlay">
+               <a href="{{ url_for('select_test') }}"><h2>Add products to Supplier</h2></a>
+               <p class="info">Our sleek quality work and  synergized effect of our team’s creative mind have paved the way for offering innovative services to our clients.
+               <a href="#">read more</a></p>
+            </div>
+	  </div>
+	  </div>
+  </div>
+</div><br><br>
+<div w3-include-html={{ url_for('footer') }}></div>
+<script>
+w3.includeHTML();
+</script>
+</body>
+</html>

@@ -244,9 +244,9 @@ $abc = date('Y-m-d ');
 		
 		<div id = "editor"></div>
 		<br/>
-		<div id = "hiderow"> <button type="button" style="left:25px;position:relative" class="btn btn-warning" onclick="printData()">Print</button></div>
-		<br/><div id="hiderow"> <button type="button" style="left:25px;position:relative" class="btn btn-success" id="cmd">Download</button> </div>
-		<br/><div id="hiderow"> <input type="submit" style="left:25px;position:relative" class="btn btn-success" id="cmd2" value="SendToServer" /> </div>
+		<div id = "hiderow"> <button type="button" style="left:75px;position:relative" class="btn btn-warning" onclick="printData()">Print</button></div>
+		<br/><div id="hiderow"> <button type="button" style="left:75px;position:relative" class="btn btn-success" id="cmd">Download</button> </div>
+		<br/><div id="hiderow"> <input type="submit" style="left:75px;position:relative" class="btn btn-success" id="cmd2" value="SendToServer" /> </div>
 		<!--<button onclick="printData()">Print me</button>-->
 		</div>
 

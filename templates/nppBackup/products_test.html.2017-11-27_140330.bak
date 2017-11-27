@@ -23,7 +23,7 @@
 <table class="table table-striped">
 <tr> <td>Category</td> <td>Product Name</td> <td>Arrival Date</td> <td>Price</td>  </tr>
 	{% for product in products %}
-		<tr><td> {{ product.p_category }}</td><td> {{ product.p_name  }}</td><td> {{ product.product_arrival_date }}</td><td> {{ product.p_price }} </td></tr>
+		<li> {{ product.p_category }} {{ product.p_name  }} {{ product.product_arrival_date }} {{ product.p_price }} </li>
 	{% endfor %}
 	<div w3-include-html={{ url_for('footer') }}></div>
 <script>

@@ -1,0 +1,26 @@
+div.contai::-webkit-scrollbar{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+div.contai::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}	
+div.contai::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius:2px;
+}
+table{
+	width:100%;
+}
+div.disp{
+	border-right:1px solid gray;
+	border-bottom:1px solid gray;
+	border-left:1px solid gray;
+	background-color:#F0E8E8;
+	border-radius:2px 2px 0 0;
+	color:#3E3535;
+	height:35px;
+	font-size:17px;
+	padding-top:6px;
+}

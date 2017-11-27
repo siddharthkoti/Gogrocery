@@ -22,9 +22,11 @@
 <div class="col-sm-12"><h3 class="text-muted">Products Details: </h3></div>
 <table class="table table-striped">
 <tr> <td>Category</td> <td>Product Name</td> <td>Arrival Date</td> <td>Price</td>  </tr>
+	<ul>
 	{% for product in products %}
-		<tr><td> {{ product.p_category }}</td><td> {{ product.p_name  }}</td><td> {{ product.product_arrival_date }}</td><td> {{ product.p_price }} </td></tr>
+		<li> {{ product.p_category }} {{ product.p_name  }} {{ product.product_arrival_date }} {{ product.p_price }} </li>
 	{% endfor %}
+	</ul>
 	<div w3-include-html={{ url_for('footer') }}></div>
 <script>
 w3.includeHTML();
