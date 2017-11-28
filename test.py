@@ -177,7 +177,7 @@ def bill_form_backend():
 	db.session.commit()
 	
 	print(products, qty, cgst, sgst, total)
-	return "success!"
+	return render_template('success_bill_fill.html')
 	
 
 @app.route('/stock_add', methods = ['POST'])
