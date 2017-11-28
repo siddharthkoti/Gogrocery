@@ -146,7 +146,10 @@ def signUpUser():
 
 @app.route('/bill_fill')
 def bill_form():
-	return render_template('bill_form.html')
+	from database import Bills
+	last_bill = Bills.query.order_by(desc(Bills.bill_no)).limit(1).first()
+	invoice_no = last_bill.bill_no
+	return render_template('bill_form.html', invoice_no = invoice_no)
 
 @app.route('/bill_fill_backend', methods = ['POST'])
 def bill_form_backend():

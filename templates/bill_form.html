@@ -23,6 +23,14 @@
 	<script src="static/js/suggestion.js"> </script>
 
     <script>
+
+    function putDate(){
+    	var date = new Date();
+    	$('#put_date').html("Date:" + date.getDate() + '-' + (parseInt(date.getMonth()) + 1) + '-' + date.getFullYear() )
+
+    }
+
+
 	var xhr1;
 	function getItems(){
 		xhr1 = new XMLHttpRequest();
@@ -118,7 +126,7 @@ function printData()
 </script>
 </head>
 
-<body id="body">
+<body id="body" onload="putDate()">
 <div w3-include-html={{ url_for('header') }}></div>
 <!-- <?php
 /* Set the default timezone */
@@ -136,12 +144,13 @@ $abc = date('Y-m-d ');
 		
 		<div id="identity">
 		
-            <textarea id="address" >B203,2nd Floor
-			PESIT
-			Banashankari 3rd Stage
-			Bangalore-560078
-			Phone: (555) 555-5555</textarea>
-            <div id="logo">
+            <div id="address">
+            B203,2nd Floor<br>
+			PESIT<br>
+			Banashankari 3rd Stage<br>
+			Bangalore-560078<br>
+			Phone: (555) 555-5555<br></div>
+            <!-- <div id="logo">
 
               <div id="logoctr">
                 <a href="javascript:;" id="change-logo" title="Change logo">Change Logo</a>
@@ -156,25 +165,25 @@ $abc = date('Y-m-d ');
                 (max width: 540px, max height: 100px)
               </div>
               <img id="image" src="" alt="logo" />
-            </div>
+            </div> -->
 		
 		</div>
 		<div id="customer">
 
-            <textarea id="customer-title">GoGrocery</textarea>
+            <div id="customer-title">GoGrocery</div>
 
             <table id="meta">
                 <tr>
-                    <td class="meta-head">Invoice #</td>
+                    <td class="meta-head">Invoice #{{ invoice_no }}</td>
                     <td><textarea></textarea></td>
                 </tr>
                 <tr>
 
-                    <td class="meta-head">Date</td>
-                    <td><textarea id="date"></textarea><input type="hidden" id="date" name="date" value=""/></td>
+                    <td id = "put_date" class="meta-head">Date:</td>
+                    <td>
                 </tr>
                 <tr>
-                    <td class="meta-head">Amount Due</td>
+                    <td class="meta-head"></td>
                     <td><div class="due"></div></td>
                 </tr>
 
