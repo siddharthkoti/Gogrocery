@@ -2,6 +2,12 @@
 <html>
 <head>
 	<title>monthly_sales_test</title>
+	<style type="text/css">
+   .inline { 
+    display: inline;  
+    margin:100px;
+    }
+  </style>
 	  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,12 +17,6 @@
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script>
 window.onload = function () {
-
-
-
-
-
-
 
 arr_amt = [];
 arr_qty = [];
@@ -117,9 +117,6 @@ arr_qty_yearly = [];
 var amt_yearly = {{amount_list_per_month|tojson}}
 var qty_yearly = {{quantity_list_per_month|tojson}}
 
-
-
-
 var len = 12;
 for (var i = 0; i < len; i++) {
     var d = new Date()
@@ -193,83 +190,6 @@ chart_qty_yearly.render();
 
 
 
-<!-- weekly chart 1 -->
-arr_amt_weekly = [];
-arr_qty_weekly = [];
-
-var amt_weekly = {{amount_list_per_day_weekly|tojson}}
-var qty_weekly = {{quantity_list_per_day_weekly|tojson}}
-
-var weekday = new Array(7);
-weekday[0] =  "Sunday";
-weekday[1] = "Monday";
-weekday[2] = "Tuesday";
-weekday[3] = "Wednesday";
-weekday[4] = "Thursday";
-weekday[5] = "Friday";
-weekday[6] = "Saturday";
-
-
-
-var len = 7;
-for (var i = 0; i < len; i++) {
-    var d = new Date()
-    d.setDate(d.getDate()-i);
-    arr_amt_weekly.push({
-        
-        y : amt_weekly[i],
-		label : weekday[d.getDay()],
-    });
-
-    arr_qty_weekly.push({
-        
-        y : qty_weekly[i],
-		label : weekday[d.getDay()]
-    });
-}
-
-var chart_weekly_amt = new CanvasJS.Chart("chartContainer_weekly_amt", {
-	animationEnabled: true,
-	theme: "light2", // "light1", "light2", "dark1", "dark2"
-	title:{
-		text: "Last 7 days Sales"
-	},
-	axisY: {
-		title: "Sales (in Rupee)"
-	},
-	data: [{        
-		type: "column",  
-		showInLegend: true, 
-		legendMarkerColor: "white",
-		legendText: "",
-		dataPoints: arr_amt_weekly 
-	}]
-});
-chart_weekly_amt.render();
-
-
-var chart_weekly_qty = new CanvasJS.Chart("chartContainer_weekly_qty", {
-	animationEnabled: true,
-	theme: "light2", // "light1", "light2", "dark1", "dark2"
-	title:{
-		text: "Last 7 days Sales in terms of Quantity"
-	},
-	axisY: {
-		title: "Quntity(in # of Units)"
-	},
-	data: [{        
-		type: "column",  
-		showInLegend: true, 
-		legendMarkerColor: "white",
-		legendText: "",
-		dataPoints: arr_qty_weekly 
-	}]
-});
-chart_weekly_qty.render();
-
-
-
-
 
 }
 </script>
@@ -311,9 +231,9 @@ chart_weekly_qty.render();
 						</div>																
 					</div>
 				</div>
-			</div>			
-	 <div id="chartContainer_weekly_amt" style="height: 300px; width: 100%;"></div><br />
-	 <div id="chartContainer_weekly_qty" style="height: 300px; width: 100%;"></div> 
+			</div> 
+	  
+	  
     </div>
 	
 	
@@ -343,8 +263,8 @@ chart_weekly_qty.render();
 			</div> 
 
 			<div>
-			<div id="chartContainer_amt" style="width: 45%; height: 300px;display: inline-block;"></div>
-			<div id="chartContainer_qty" style="width: 45%; height: 300px;display: inline-block;"></div>
+			<div id="chartContainer_amt" class="inline"></div>
+			<div id="chartContainer_qty" class="inline"></div>
 			</div>
 	  
     </div>
@@ -361,11 +281,9 @@ chart_weekly_qty.render();
 									<div class="col-sm-12"><h3 class="text-muted"><mark>Date : {{ start_date }} to {{ end_date }}</mark></h3></div>
 										<table class="table table-striped">
 										<tr><td>Item</td><td>Total Quantity Sold</td><td>price</td> <td>Total</td></tr>
-										
 										{% for i in yearly %}
-											<tr><td>{{ yearly[i][0] }}</td><td> {{ yearly[i][1] }}</td><td>{{ m2[i] }}</td> <td> {{ yearly[i][1]*m2[i] }}</td></tr> 
+											<tr><td>{{ yearly[i][0] }}</td><td> {{ yearly[i][1] }}</td><td>{{ m2[i] }}</td> <td> {{ yearly[i][1]*m2[i] }}</td></tr>
 										{% endfor %}
-										<!-- <tr><td><b>Total</b></td><td></td><td></td><td></td></tr> -->
 										</table>
 								</div>	
 							</div>
@@ -375,8 +293,8 @@ chart_weekly_qty.render();
 			</div> 
 
 			<div>
-			<div id="chartContainer_amt_yearly" style="width: 45%; height: 300px;display: inline-block;"></div>
-			<div id="chartContainer_qty_yearly" style="width: 45%; height: 300px;display: inline-block;"></div>
+			<div id="chartContainer_amt_yearly" style="height: 370px; width: 620px; margin: 30px auto;display:inline;"></div>
+			<div id="chartContainer_qty_yearly" style="height: 370px; width: 620px; margin: 30px auto;display:inline;"></div>
 			</div>
     </div>
 

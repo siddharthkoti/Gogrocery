@@ -116,7 +116,11 @@ def select_test():
 
 @app.route('/header')
 def header():
-    return render_template('header.html')	
+	if 'user' in session:
+		username = session['user']
+	else:
+		username = "NO user logged In. Please Login!"
+	return render_template('header.html', username = username)	
 
 @app.route('/footer')
 def footer():
@@ -382,6 +386,7 @@ def add_product():
 def returnpagetest():
 
 	return render_template('returnpagetest.html')
+
 @app.route('/fetch_suppliers')
 def fetch_suppliers():
 	from database import  Supplier
@@ -461,7 +466,7 @@ def search_by_bill_id():
 	return render_template('search_by_bill_id.html')
 
 
-@app.route('/get_details_of_bill', methods=['POST'])		
+@app.route('/get_details_of_bill', methods=['POST','GET'])		
 def get_details_of_bill():	
 	
 	#Gets details of the bill, i.e its products and cost of each product and quantity
@@ -601,6 +606,42 @@ def get_sales():
 	m3 = {i[0]: i[1] for i in m}
 	#op: {'p3' : 30, 'p2': 10}
 	
+	amount_list_per_day_weekly = []
+	quantity_list_per_day_weekly = []
+	for i in range(7):
+		date = datetime.date.today() + datetime.timedelta(-i)
+		half = Bills.query.filter(Bills.bill_date == date)#.all()
+		bills = half.all()
+		list_bill_no = [i.bill_no for i in bills]
+		amt = half.with_entities(func.sum(Bills.bill_amt)).group_by(Bills.bill_date).first() #op:(1125,)
+		if amt == None:
+			amt = 0
+		else:
+			amt = amt[0]
+		amount_list_per_day_weekly.append(amt)
+		
+		if len(list_bill_no) == 0:
+			quantity_list_per_day_weekly.append(0)
+		else:
+			quantity = Transactions.query.filter(Transactions.bill_no.in_(list_bill_no)).with_entities(func.sum(Transactions.quantity)).group_by(Transactions.bill_no).all()
+			total_q = 0
+			for i in quantity:
+				total_q += i[0]
+			quantity_list_per_day_weekly.append(total_q)
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	#---------------------------------------------------------------------
 	# pids = list(products)
 	
@@ -617,46 +658,53 @@ def get_sales():
 	categories = mid.with_entities(Product.p_category, func.sum(Transactions.quantity)).group_by(Product.p_category).all()
 	
 	#mid.with_entities(Product.p_category, func.sum(Transactions.quantity)).group_by(Product.p_category).all()
-	return render_template('sales_summary.html',monthly = monthly, yearly = yearly , weekly= weekly, m1 = m1, m2 = m2, m3 = m3, amount_list_per_day = amount_list_per_day, quantity_list_per_day = quantity_list_per_day, quantity_list_per_month = quantity_list_per_month, amount_list_per_month = amount_list_per_month, end_date = end_date)#, start_date = start_date,end_date = end_date, categories = categories, sub_categories = sub_categories)
+	return render_template('sales_summary.html',monthly = monthly, yearly = yearly , weekly= weekly, m1 = m1, m2 = m2, m3 = m3, amount_list_per_day = amount_list_per_day, quantity_list_per_day = quantity_list_per_day, quantity_list_per_month = quantity_list_per_month, amount_list_per_month = amount_list_per_month, end_date = end_date, amount_list_per_day_weekly=amount_list_per_day_weekly, quantity_list_per_day_weekly=quantity_list_per_day_weekly)#, start_date = start_date,end_date = end_date, categories = categories, sub_categories = sub_categories)
 
 @app.route('/get_tax_details_to_file')#, methods=['GET'])
-def get_tax_details_to_file():
+def get_tax_details_to_file():	
 	from database import Bills, TaxesFiled
-	
+	file=False
+	overdue=False
 	last_filled = TaxesFiled.query.order_by(desc(TaxesFiled.id)).limit(1).first()
 	last_filled_date = last_filled.end
 	
+	next_file_date=last_filled_date+datetime.timedelta(345)
+
 	#Tax collected after the last filled date
 	end_date = datetime.date.today() + datetime.timedelta(-1)
-	bills = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= last_filled_date).all()
-	
-	
-	last_filled_date = last_filled_date + datetime.timedelta(1)
-	return render_template('details_of_tax.html',last_filled = last_filled, bills = bills, last_filled_date = last_filled_date)
+	today_date = datetime.date.today()
+	if(end_date>next_file_date):
+		file=True
+	if(end_date>next_file_date+datetime.timedelta(20)):
+		overdue=True
+
+
+
+	bills = Bills.query.filter(Bills.bill_date <= today_date).filter(Bills.bill_date > last_filled_date).all()
+
+
+	return render_template('details_of_tax.html',file=file,overdue=overdue,next_file_date = next_file_date,last_filled = last_filled, bills = bills, last_filled_date = last_filled_date)
 	
 	
 @app.route('/file_taxes')#, methods=['GET'])
 def file_taxes():
 	from database import Bills, TaxesFiled
-	
-	start_date = datetime.date.today() + datetime.timedelta(-366)
-	end_date = datetime.date.today() + datetime.timedelta(-1)
-	q = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= start_date).all()
-	gst_list = [i.gst for i in q]
-	
-	total_gst = sum(gst_list)
-	
+	today_date = datetime.date.today()
+
 	get_last_tax = TaxesFiled.query.order_by(desc(TaxesFiled.id)).limit(1).first()
 	get_last_filed_date = get_last_tax.end
-	
-	if get_last_filed_date > start_date:
-		return "you have Already filed the taxes for the year!"
-	
-	start_date = get_last_tax.start
+	start_date = get_last_filed_date + datetime.timedelta(1)
+	end_date = today_date+ datetime.timedelta(-1)
+
+
+
 	q = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= start_date).all()
 	gst_list = [i.gst for i in q]
 	total_gst = sum(gst_list)
 	
+	# if get_last_filed_date  < start_date:
+	# 	return "you have Already filed the taxes for the year!"
+
 	tax = TaxesFiled(start_date, end_date, total_gst)
 	
 	db.session.add(tax)
