@@ -7,13 +7,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="{{url_for('dashboard')}}">GOGROCERY</a>
+      <a class="navbar-brand" href="#">GOGROCERY</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active">
-          <!-- <a href="{{url_for('dashboard')}}">Home</a> -->
-        </li>
+        <li class="active"><a href="{{url_for('dashboard')}}">Home</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 		<li><a href="{{url_for('add_user_page')}}"><span class="glyphicon glyphicon-plus"></span> Add User</a></li>
@@ -29,15 +27,4 @@
     <p></p>
   </div>
 </div>
-<<<<<<< HEAD
- <h1><div id="admin" class="text-muted">{% if username == "NO user logged In. Please Login!" %}
-                                  <div>NO user logged In. Please Login!</div>
-                                  {% else %}
-
- <div>Logged in as: {{ username }},</div>
-
- {% endif %}
-</div></h1>
-=======
- <h1><div id="admin" class="text-muted">Logged in as: {{ username }}</div></h1>
->>>>>>> 94a3090da4ca0abe4971f5d5b50726b2300c2910
+ <h1><div id="admin" class="text-muted">Logged in as: {{ username }},</div></h1>
