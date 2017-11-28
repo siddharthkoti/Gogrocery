@@ -33,19 +33,22 @@
 
 <div class="jumbotron">
   <div class="text-center">
-    <h1>GOGROCERY</h1>      
+    <h1>GOGROCERY</h1>
+    <div id="admin">{% if username == "NO user logged In. Please Login!" %}
+                                  <div>Please <a href="{{url_for('index')}}" style="text-decoration: none;font-style: oblique;color: black">Login</a> &amp; Continue!</div>
+                                  {% else %}
+
+
+ <h5 style="font-style:oblique;font-size: 1.2em">Hello {{ username }}!</h5>      
     <p></p>
   </div>
 </div>
 
- <h1><div id="admin" class="text-muted">{% if username == "NO user logged In. Please Login!" %}
-                                  <div>NO user logged In. Please Login!</div>
-                                  {% else %}
-
- <div>Logged in as: {{ username }},</div>
+ 
 
  {% endif %}
-</div></h1>
+ </div></h3>
+
 
  
 
