@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="static/css/nav_fix.css">
 <nav class="navbar navbar-inverse navbar_fix">
   <div class="container-fluid">
     <div class="navbar-header">

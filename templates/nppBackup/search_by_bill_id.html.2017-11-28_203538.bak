@@ -3,7 +3,7 @@
 	<script type="text/javascript" src="static/js/product_filter.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<!-- <link rel="stylesheet" href="static/css/nav_fix.css"> -->
+	<link rel="stylesheet" href="static/css/nav_fix.css">
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	   <script src="static/js/w3.js"></script>
 </head>
