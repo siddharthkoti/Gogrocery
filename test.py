@@ -196,7 +196,7 @@ def stock_add():
 	
 	db.session.commit()
 		
-	return 'product record added successfully'
+	return render_template('success_update_stock.html')
 	
 
 @app.route('/get_list_of_products', methods=['GET'])
