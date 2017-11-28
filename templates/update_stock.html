@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update Stocks</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="static/js/update_stock.js"></script> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script src="static/js/w3.js"></script>
+   <script>
+ 
+   </script>
+</head>
+<body onload="fetch1()">
+		<div w3-include-html={{ url_for('header') }} ></div>
+		<form role="form" action= "{{ url_for('stock_add')}}" method="POST">
+		
+		<div class="form-group">
+		<label class="col-xs-3 control-label"> Categorrrrrrrrrrrry</label><div class="col-xs-5 selectContainer"><select name="category" id="category" class="form-control" onchange="fetch2()"></select></div></br></br>
+		</div>	
+	<div class="form-group">
+		<label class="col-xs-3 control-label">Sub Category</label><div class="col-xs-5 selectContainer"><select name="sub_category" class="form-control" id="sub_category" onchange="fetch3()"></select></div></br></br>
+		</div>
+		<div class="form-group">
+		<label class="col-xs-3 control-label">Product Name</label><div class="col-xs-5 selectContainer"><select name="Product" class="form-control" id="product"  ></select></div></br></br>
+		</div>
+		<div class="form-group">
+		<label class="col-xs-3 control-label"> Stock</label><div class="col-xs-5 selectContainer"><input class="form-control" type="text" name="stock" id ="stock" /></div></br></br>
+		</div>
+		
+		<div class="form-group">
+		<input class="btn btn-dark" style="position:absolute;right:460px;" type="submit" value="Update Stock">
+		</form>
+		</br></br></br>
+		
+		<div w3-include-html={{ url_for('footer') }}></div>
+		<script>
+		w3.includeHTML();
+		</script>
+</body>
+</html>

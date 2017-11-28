@@ -180,6 +180,25 @@ def bill_form_backend():
 	return "success!"
 	
 
+@app.route('/stock_add', methods = ['POST'])
+def stock_add():
+	from database import Product, Supplier, Stock
+	# #try:
+	
+	p_category = request.form['category']
+	p_sub_category = request.form['sub_category']
+	pname = request.form['Product']
+	qty = request.form['stock']
+	#console.log(qty)
+	prod = Product.query.filter_by(p_name = pname).first()
+	s = Stock.query.filter_by(pid = prod.pid).first()
+	s.stocks_left = s.stocks_left + int(qty)
+	
+	db.session.commit()
+		
+	return 'product record added successfully'
+	
+
 @app.route('/get_list_of_products', methods=['GET'])
 def list_of_products():
 	#<form action = {{ url_for('list_of_products') }} method = 'POST' >
@@ -253,6 +272,21 @@ def all_products_filter():
 	
 	#return render_template('filter_test.html', products = q)	
 	return json.dumps(products)
+
+@app.route('/update_stock')
+def update_stock():
+	return render_template('update_stock.html')
+
+
+
+
+
+
+
+
+
+
+
 
 
 @app.route('/add_supplier_page')
@@ -368,6 +402,24 @@ def fetch_products():
 	lst = Product.query.filter_by(p_category = category).filter_by(p_sub_category = sub_category).all()
 	category_lst = [[k.p_name,k.pid] for k in lst]
 	return json.dumps(category_lst)
+
+# @app.route('/fetch_supplier', methods=['GET'])
+# def fetch_supplier():
+# 	category = request.args.get('val1')
+# 	sub_category = request.args.get('val2')
+# 	product = request.args.get('val3')
+# 	from database import Product, Stock, Supplier
+# 	lst = Product.query.filter_by(p_category = category).filter_by(p_sub_category = sub_category).filter_by(p_name = sub_category).with_entities(Product.pid).all()
+# 	# category_lst = [[k.p_name,k.pid] for k in lst]
+# 	search_pid=lst[0][0]
+# 	lst = Stock.query.filter_by(pid=search_pid).all()
+# 	supp_lst = [k.sid for k in lst]
+# 	suppname_lst=[]
+# 	for i in supp_lst:
+# 		j=Supplier.query.filter_by(sid=i).with_entities(Supplier.s_name).all()[0][0]
+# 		suppname_lst.append(j)
+# 	#suppname_lst=['a','b']
+# 	return json.dumps(suppname_lst)
 
 @app.route('/get_bills')#, methods=['GET'])	
 def get_bills():
