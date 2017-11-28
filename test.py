@@ -627,41 +627,48 @@ def get_sales():
 @app.route('/get_tax_details_to_file')#, methods=['GET'])
 def get_tax_details_to_file():	
 	from database import Bills, TaxesFiled
-	
+	file=False
+	overdue=False
 	last_filled = TaxesFiled.query.order_by(desc(TaxesFiled.id)).limit(1).first()
 	last_filled_date = last_filled.end
 	
+	next_file_date=last_filled_date+datetime.timedelta(345)
+
 	#Tax collected after the last filled date
 	end_date = datetime.date.today() + datetime.timedelta(-1)
+
+	if(end_date>next_file_date):
+		file=True
+	if(end_date>next_file_date+datetime.timedelta(20)):
+		overdue=True
+
+
+
 	bills = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= last_filled_date).all()
-	
-	
-	last_filled_date = last_filled_date + datetime.timedelta(1)
-	return render_template('details_of_tax.html',last_filled = last_filled, bills = bills, last_filled_date = last_filled_date)
+
+
+	return render_template('details_of_tax.html',file=file,overdue=overdue,next_file_date = next_file_date,last_filled = last_filled, bills = bills, last_filled_date = last_filled_date)
 	
 	
 @app.route('/file_taxes')#, methods=['GET'])
 def file_taxes():
 	from database import Bills, TaxesFiled
-	
-	start_date = datetime.date.today() + datetime.timedelta(-366)
-	end_date = datetime.date.today() + datetime.timedelta(-1)
-	q = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= start_date).all()
-	gst_list = [i.gst for i in q]
-	
-	total_gst = sum(gst_list)
-	
+	today_date = datetime.date.today()
+
 	get_last_tax = TaxesFiled.query.order_by(desc(TaxesFiled.id)).limit(1).first()
 	get_last_filed_date = get_last_tax.end
-	
-	if get_last_filed_date > start_date:
-		return "you have Already filed the taxes for the year!"
-	
-	start_date = get_last_tax.start
+	start_date = get_last_filed_date + datetime.timedelta(1)
+	end_date = today_date+ datetime.timedelta(-1)
+
+
+
 	q = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= start_date).all()
 	gst_list = [i.gst for i in q]
 	total_gst = sum(gst_list)
 	
+	# if get_last_filed_date  < start_date:
+	# 	return "you have Already filed the taxes for the year!"
+
 	tax = TaxesFiled(start_date, end_date, total_gst)
 	
 	db.session.add(tax)

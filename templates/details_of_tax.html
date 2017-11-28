@@ -11,6 +11,8 @@
 		<tr><td>Bills taken into Consideration from :</td><td>{{ last_filled.start }}</td></tr>
 		<tr><td>Bills taken into Consideration till :</td><td>{{ last_filled.end }}</td></tr>
 		<tr><td>Total Amount Filed :</td><td>{{ last_filled.total_amt }}</td></tr>
+		<tr><td>NEXT filing Date :</td><td>{{ next_file_date }}</td></tr>
+
 
 	</table>
 
@@ -20,6 +22,13 @@
 		{% for bill in bills %}	
 			<tr><td>{{bill.bill_no}}</td><td>{{bill.bill_date}}</td> <td>{{bill.bill_amt}}</td> <td>{{bill.gst}}</td></tr>
 		{% endfor %}
+
+		{% if file == False %}	
+			<tr><td>NOT  FILEABLE</td></tr>
+		{% endif%}
+		{% if overdue == True %}	
+			<tr><td>OVERDUE</td></tr>
+		{% endif%}
 
 
 		
