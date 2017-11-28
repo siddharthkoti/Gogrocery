@@ -287,8 +287,8 @@ chart_qty_yearly.render();
 			</div> 
 
 			<div>
-			<div id="chartContainer_amt_yearly" style="width: 45%; height: 300px;display: inline-block;"></div>
-			<div id="chartContainer_qty_yearly" style="width: 45%; height: 300px;display: inline-block;"></div>
+			<div id="chartContainer_amt_yearly" style="height: 370px; width: 620px; margin: 30px auto;display:inline;"></div>
+			<div id="chartContainer_qty_yearly" style="height: 370px; width: 620px; margin: 30px auto;display:inline;"></div>
 			</div>
     </div>
 
@@ -299,8 +299,7 @@ chart_qty_yearly.render();
 
 
 
-	
-<div w3-include-html={{ url_for('footer') }}></div>
+
 <script>
 w3.includeHTML();
 </script>
