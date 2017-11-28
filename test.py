@@ -178,6 +178,7 @@ def bill_form_backend():
 	
 	print(products, qty, cgst, sgst, total)
 	return "success!" #to be updated without fail tomoro	
+<<<<<<< HEAD
 	
 
 @app.route('/stock_add', methods = ['POST'])
@@ -197,6 +198,8 @@ def stock_add():
 	db.session.commit()
 		
 	return 'product record added successfully'
+=======
+>>>>>>> d21f1dadd194e10b999b8ce5ce47f34eec759640
 	
 
 @app.route('/get_list_of_products', methods=['GET'])
