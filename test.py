@@ -116,7 +116,11 @@ def select_test():
 
 @app.route('/header')
 def header():
-    return render_template('header.html')	
+	if 'user' in session:
+		username = session['user']
+	else:
+		username = "NO user logged In. Please Login!"
+	return render_template('header.html', username = username)	
 
 @app.route('/footer')
 def footer():
@@ -382,6 +386,7 @@ def add_product():
 def returnpagetest():
 
 	return render_template('returnpagetest.html')
+
 @app.route('/fetch_suppliers')
 def fetch_suppliers():
 	from database import  Supplier
@@ -461,7 +466,7 @@ def search_by_bill_id():
 	return render_template('search_by_bill_id.html')
 
 
-@app.route('/get_details_of_bill', methods=['POST'])		
+@app.route('/get_details_of_bill', methods=['POST','GET'])		
 def get_details_of_bill():	
 	
 	#Gets details of the bill, i.e its products and cost of each product and quantity
