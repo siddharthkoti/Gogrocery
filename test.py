@@ -375,8 +375,13 @@ def add_product():
 	db.session.add(stock)
 	db.session.commit()
 		
-	return 'product record added successfully'
+	return render_template('success_add_product.html')
 
+
+@app.route('/returnpagetest')
+def returnpagetest():
+
+	return render_template('returnpagetest.html')
 @app.route('/fetch_suppliers')
 def fetch_suppliers():
 	from database import  Supplier
