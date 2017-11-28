@@ -620,7 +620,7 @@ def get_sales():
 	return render_template('sales_summary.html',monthly = monthly, yearly = yearly , weekly= weekly, m1 = m1, m2 = m2, m3 = m3, amount_list_per_day = amount_list_per_day, quantity_list_per_day = quantity_list_per_day, quantity_list_per_month = quantity_list_per_month, amount_list_per_month = amount_list_per_month, end_date = end_date)#, start_date = start_date,end_date = end_date, categories = categories, sub_categories = sub_categories)
 
 @app.route('/get_tax_details_to_file')#, methods=['GET'])
-def get_tax_details_to_file():
+def get_tax_details_to_file():	
 	from database import Bills, TaxesFiled
 	
 	last_filled = TaxesFiled.query.order_by(desc(TaxesFiled.id)).limit(1).first()
