@@ -29,11 +29,7 @@ background-size: 1400px 625px;
       font-size:150%;
       font-family: Arial, Helvetica, sans-serif;
 }
-#fter{
-	position:absolute;
-	bottom:0px;
-	right:550px;
-}
+
  
 
 
@@ -101,7 +97,7 @@ background-size: 1400px 625px;
 </div>
 </form>
 </div>
-<div w3-include-html={{ url_for('footer') }} id="fter"></div>
+<div w3-include-html={{ url_for('footer') }}></div>
 <script>
 w3.includeHTML();
 </script>

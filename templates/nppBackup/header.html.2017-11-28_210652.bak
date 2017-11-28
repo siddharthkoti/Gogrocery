@@ -27,4 +27,4 @@
     <p></p>
   </div>
 </div>
- <h1><div id="admin" class="text-muted">Logged in as: {{ username }}</div></h1>
+ <h1><div id="admin" class="text-muted">Logged in as: {{ username }},</div></h1>

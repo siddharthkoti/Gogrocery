@@ -31,8 +31,7 @@ background-size: 1400px 625px;
 }
 #fter{
 	position:absolute;
-	bottom:0px;
-	right:550px;
+	bottom:100px;
 }
  
 
