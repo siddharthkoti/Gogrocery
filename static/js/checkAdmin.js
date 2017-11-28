@@ -1,0 +1,19 @@
+function checkAdmin(){
+		$.ajax({
+			url: '/check_admin',
+			type: 'GET',
+			success: function(response){
+				//console.log(response.list_of_data); //	IF using the jasonify
+				console.log(response); //if using json.dumps({object})
+				var s = "";
+				response = JSON.parse(response)
+				if(response=="admin")
+					s+="Welcome Admin";
+				document.getElementById("admin").innerHTML=s;	
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+	
+}

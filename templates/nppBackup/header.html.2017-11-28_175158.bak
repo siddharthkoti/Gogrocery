@@ -26,4 +26,4 @@
     <p></p>
   </div>
 </div>
- <h1><div id="admin" class="text-muted">Hello {{ username }},</div></h1>
+ <h1><div id="admin" class="text-muted">Hello {{ username }}</div>
