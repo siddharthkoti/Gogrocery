@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>monthly_sales_test</title>
+
 	  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -256,9 +257,9 @@ chart_qty_yearly.render();
 				</div>
 			</div> 
 
-			<div>
-			<div id="chartContainer_amt" style="width: 45%; height: 300px;display: inline-block;"></div>
-			<div id="chartContainer_qty" style="width: 45%; height: 300px;display: inline-block;"></div>
+			<div style="text-align:center;">
+			<div id="chartContainer_amt" style="display:inline;"></div>
+			<div id="chartContainer_qty" style="display:inline;"></div>
 			</div>
 	  
     </div>
@@ -287,8 +288,8 @@ chart_qty_yearly.render();
 			</div> 
 
 			<div>
-			<div id="chartContainer_amt_yearly" style="width: 45%; height: 300px;display: inline-block;"></div>
-			<div id="chartContainer_qty_yearly" style="width: 45%; height: 300px;display: inline-block;"></div>
+			<div id="chartContainer_amt_yearly" style="height: 370px; width: 620px; margin: 30px auto;display:inline;"></div>
+			<div id="chartContainer_qty_yearly" style="height: 370px; width: 620px; margin: 30px auto;display:inline;"></div>
 			</div>
     </div>
 
