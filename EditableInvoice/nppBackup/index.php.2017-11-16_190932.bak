@@ -4,28 +4,21 @@
 <head>
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 	
-	<title>GOGROCERY</title>	
+	<title>LAVENIR TECHNOLOGIES</title>	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-	<link rel='stylesheet' type='text/css' href='static/css/style.css' />
-	
-
-	
-	<link rel='stylesheet' type='text/css' href='static/css/bootstrap.min.css'/>
-	<link rel='stylesheet' type='text/css' href='static/css/font-awesome.min.css' />
-	<script type='text/javascript' src='static/js/jquery-1.3.2.min.js'></script>
-	<script type='text/javascript' src='static/js/example.js'></script>
-	<script type='text/javascript' src='static/js/suggestion.js'></script>
-	<script src="static/js/w3.js"></script>
+	<link rel='stylesheet' type='text/css' href='css/style.css' />
+	<link rel='stylesheet' type='text/css' href='css/print.css' media="print" />
+	<link rel='stylesheet' type='text/css' href='css/bootstrap.min.css'/>
+	<link rel='stylesheet' type='text/css' href='css/font-awesome.min.css' />
+	<script type='text/javascript' src='js/jquery-1.3.2.min.js'></script>
+	<script type='text/javascript' src='js/example.js'></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 	<script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-	<link rel = "stylesheet" type="text/css" href="static/css/bootstrap-3.3.6-dist/css/bootstrap.css"></link>
-
-	<script src="static/js/suggestion.js"> </script>
-
+	
     <script>
 	var xhr1;
 	function getItems(){
-		xhr1 = new XMLHttpRequest();
+		xhr1=new XMLHttpRequest();
 		xhr1.open("GET","items.php",false);
 		xhr1.onreadystatechange=putItems;
 		xhr1.send();
@@ -38,13 +31,13 @@
 	}
 	var xhr2;
 	var i=0;
-	// function Autofill(){
-	// 	var product = document.getElementsByClassName("products")[i];
-	// 	xhr2 = new XMLHttpRequest();
-	// 	xhr2.open("GET","fill.php?product="+product.value,false);
-	// 	xhr2.onreadystatechange=fillAttr;
-	// 	xhr2.send();
-	// }
+	function Autofill(){
+		var product = document.getElementsByClassName("products")[i];
+		xhr2 = new XMLHttpRequest();
+		xhr2.open("GET","fill.php?product="+product.value,false);
+		xhr2.onreadystatechange=fillAttr;
+		xhr2.send();
+	}
 	function decrement(){
 		//console.log(i);
 		i--;
@@ -58,50 +51,35 @@
 	}
 	function fillAttr(){
 		
-		
-			
-			
-			
+		if(xhr2.readyState==4 && xhr2.status==200){
+			//console.log("hi");
+			var res = xhr2.responseText;
+			var arr = res.split(";");				
 			var qnt = document.getElementsByClassName("qty")[i];
-			var cost = document.getElementsByClassName("cost")[i].value;
-
-			var cgst = document.getElementsByClassName("cgst")[i].value;
-			var sgst = document.getElementsByClassName("sgst")[i].value;
+			var cost = document.getElementsByClassName("cost")[i];
+			var cgst = document.getElementsByClassName("cgst")[i];
+			var sgst = document.getElementsByClassName("sgst")[i];
 			var price = document.getElementsByClassName("pri")[i];
 			var q = qnt.value;
-			
-			total_cost = cost * q;
-
-			var gst_tax = ((cgst/100)*(total_cost)) + ((sgst/100)*(total_cost))
-			var p = total_cost + gst_tax;
-			price.value = p.toPrecision(8);
-			sum(gst_tax, p);
-		
+			//console.log(qnt);
+			cost.innerHTML = q*arr[0];
+			cgst.innerHTML = arr[1];
+			sgst.innerHTML = arr[2];
+			var p = (q*arr[0])+(((arr[1]/100)*(q*arr[0]))+((arr[2]/100)*(q*arr[0])));
+			price.innerHTML = p.toPrecision(8);
+			sum();
+		}
 	}
 	
-	function sum(gst, total){
-		// var pr=document.getElementsByClassName("pri");
-		// var sum=0;
-		// for(var j=0;j<i+1;j++){
-		// 	console.log(j);
-		// 	sum+=parseFloat(pr[j].value);
-		// }
-		// console.log(sum);
-		
-		var sum = parseFloat(document.getElementById("total").innerHTML);
-		console.log(sum)
-		sum += total;
-
-		var total_gst = parseFloat(document.getElementById("gst").innerHTML);
-		console.log(total_gst)
-		total_gst += gst;
-			
+	function sum(){
+		var pr=document.getElementsByClassName("pri");
+		var sum=0;
+		for(var j=0;j<i+1;j++){
+			console.log(j);
+			sum+=parseFloat(pr[j].value);
+		}
+		console.log(sum);
 		document.getElementById("total").innerHTML=sum.toPrecision(8);
-		document.getElementById("gst").innerHTML=total_gst.toPrecision(8);
-
-		document.getElementById("gst_input").value = total_gst;
-		document.getElementById("total_input").value = sum;
-
 		return;
 	}
 	</script>
@@ -119,28 +97,28 @@ function printData()
 </head>
 
 <body id="body">
-<div w3-include-html={{ url_for('header') }}></div>
-<!-- <?php
+<?php
 /* Set the default timezone */
 date_default_timezone_set("Asia/Kolkata");
 
 /* Set the date */
 $date = strtotime(date("Y-m-d"));
 $abc = date('Y-m-d ');
-?> -->
-<form action= {{ url_for('bill_form_backend') }} method="POST">
+?>
+<form action="bill.php" method="POST">
 	<div id="content">
-	<div id="page-wrap" style="width:100%;">
+	<div id="page-wrap">
 
 		<textarea id="header">INVOICE</textarea>
 		
 		<div id="identity">
 		
-            <textarea id="address" >B203,2nd Floor
-			PESIT
-			Banashankari 3rd Stage
-			Bangalore-560078
-			Phone: (555) 555-5555</textarea>
+            <textarea id="address" >3rd floor
+JP Nagar 7th Phase
+Bangalore-560078
+
+Phone: (555) 555-5555</textarea>
+
             <div id="logo">
 
               <div id="logoctr">
@@ -155,13 +133,16 @@ $abc = date('Y-m-d ');
                 <input id="imageloc" type="text" size="50" value="" /><br />
                 (max width: 540px, max height: 100px)
               </div>
-              <img id="image" src="" alt="logo" />
+              <img id="image" src="images/logo.png" alt="logo" />
             </div>
 		
 		</div>
+		
+		<div style="clear:both"></div>
+		
 		<div id="customer">
 
-            <textarea id="customer-title">GoGrocery</textarea>
+            <textarea id="customer-title">Lavenir Technologies</textarea>
 
             <table id="meta">
                 <tr>
@@ -171,7 +152,7 @@ $abc = date('Y-m-d ');
                 <tr>
 
                     <td class="meta-head">Date</td>
-                    <td><textarea id="date"></textarea><input type="hidden" id="date" name="date" value=""/></td>
+                    <td><textarea id="date"></textarea><input type="hidden" id="date" name="date" value="<?php echo $abc ?>"/></td>
                 </tr>
                 <tr>
                     <td class="meta-head">Amount Due</td>
@@ -181,7 +162,7 @@ $abc = date('Y-m-d ');
             </table>
 		
 		</div>
-		</div>
+		
 		<table id="items">
 		
 		  <tr>
@@ -195,38 +176,26 @@ $abc = date('Y-m-d ');
 		  
 		  <tr class="item-row">
 		      <td class="item-name"><div class="delete-wpr">
-			  <input list="products" class="products" name="product[]" id="product1" onkeyup="obj.getCity(this.id)" autocomplete="off">
-			  <div class="hidden" id="contaiproduct1"> <!-- rem: its contai + product1 -->
-				<!-- <div class="disp">mr India</div>
-				 <div class="disp">HHIIhello</div> --> 
-				</div>
+			  <input list="products" class="products" name="product[]" onclick="getItems()">
 			  <datalist id="products">
 			  </datalist>
-			  <input type="hidden" name="pid[]" value =""/>
 			  </input><a class="delete" href="javascript:;" onclick="return decrement();" title="Remove row">X</a></div></td>
-			  <td><input id = "qty1" class="qty" name="qty[]" onblur="fillAttr()"></input></td>
-		      <td><input id = "cost1" class="cost" name="cost[]"></input></td>
-			  <td><input id = "cgst1" class="cgst" name="cgst[]"></input></td>
-			  <td><input id = "sgst1" class="sgst" name="sgst[]"></input></td>
-		      <td><input id = "pri1" class="pri" name="total[]" ></input></td>
+			  <td><input class="qty" name="qty[]" onblur="Autofill()"></input></td>
+		      <td><input class="cost" name="cost[]"></input></td>
+			  <td><input class="cgst" name="cgst[]"></input></td>
+			  <td><input class="sgst" name="sgst[]"></input></td>
+		      <td><input class="pri" name="total[]" ></input></td>
 		  </tr>
 		  
 		  <tr id="hiderow">
 		    <td colspan="8"><a id="addrow" href="javascript:;" onclick="return increment();" title="Add a row">Add an item</a></td>
 		  </tr>
 		  
-		  
 		  <tr>
 
-		     
-		      <td colspan="2" class="blank"> </td>
-		      <td colspan="1" class="total-line">Total GST</td>
-		      <td class="total-value"><div id="gst">0.0</div></td>
-		      <input type ="hidden" id="gst_input" name ="gst" value="0"/>
-		      
-		      <td colspan="2" class="total-line">Total</td>
-		      <td class="total-value"><div id="total">0.0</div></td>
-		      <input type ="hidden" id="total_input" name = "total" value="0"/>
+		      <td colspan="3" class="blank"> </td>
+		      <td colspan="3" class="total-line">Total</td>
+		      <td class="total-value"><div id="total"></div></td>
 		  </tr>
 		  <tr>
 		      <td colspan="3" class="blank"> </td>
@@ -241,21 +210,19 @@ $abc = date('Y-m-d ');
 		  </tr>
 		
 		</table>
-		
-		<div id = "editor"></div>
-		<br/>
-		<div id = "hiderow"> <button type="button" style="left:25px;position:relative" class="btn btn-dark" onclick="printData()">Print</button></div>
-		<br/><div id="hiderow"> <button type="button" style="left:25px;position:relative" class="btn btn-dark" id="cmd">Download</button> </div>
-		<br/><div id="hiderow"> <input type="submit" style="left:25px;position:relative" class="btn btn-dark" id="cmd2" value="SendToServer" /> </div>
-		<!--<button onclick="printData()">Print me</button>-->
 		</div>
-
-
+		<div id="editor"></div>
+		<br/>
+		<div id="hiderow"> <button type="button" style="left:275px;position:relative" class="btn btn-warning" onclick="printData()">Print</button></div>
+		<br/><div id="hiderow"> <button type="button" style="left:275px;position:relative" class="btn btn-success" id="cmd">Download</button> </div>
+		<br/><div id="hiderow"> <input type="submit" style="left:275px;position:relative" class="btn btn-success" id="cmd2" value="SendToServer" /> </div>
+		<!--<button onclick="printData()">Print me</button>-->
+		<div id="terms">
+		  <h5>Terms</h5>
+		  <textarea>Products can be returned within 30 days</textarea>
+		</div>
+		</div>
 	</form>
-	<div w3-include-html={{ url_for('footer') }}></div>
-<script>
-w3.includeHTML();
-</script>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
         <script>
