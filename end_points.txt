@@ -1,4 +1,0 @@
-/get_list_of_products -> ajax->list of all products
-
-
-/all_products' -> returns all products
