@@ -304,12 +304,12 @@ def add_supplier():
 	s_number = request.form['mobile_no']
 	s_address = request.form['address']
 	
-	sid = Supplier.query.order_by(desc(Supplier.sid)).limit(1).all()
-	sid = sid[0]
-	sid = sid.sid 
-	prefix = sid[:1]
-	postfix = int(sid[1:])
-	postfix = postfix + 1
+	sids = Supplier.query.all()
+	sid_list = [k.sid for k in sids]
+	sid_list = [int(k[1:]) for k in sid_list]
+	sid_list.sort( reverse = True) 
+	prefix = 's'
+	postfix = sid_list[0] + 1
 	sid = prefix + str(postfix)
 		
 	#Create a Supplier object to insert into the Supplier table
@@ -349,12 +349,12 @@ def add_product():
 	p_sale_price = request.form['sale_price']
 	sid = request.form['supplier']
 	
-	pid = Product.query.order_by(desc(Product.pid)).limit(1).all()
-	pid = pid[0]
-	pid = pid.pid 
-	prefix = pid[:1]
-	postfix = int(pid[1:])
-	postfix = postfix + 1
+	pids = Product.query.all()
+	pid_list = [k.pid for k in pids]
+	pid_list = [int(k[1:]) for k in pid_list]
+	pid_list.sort( reverse = True)
+	prefix = 'p'
+	postfix = pid_list[0] + 1
 	pid = prefix + str(postfix)
 		
 		
