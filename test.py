@@ -335,7 +335,9 @@ def add_product_page():
 	
 @app.route('/add_product', methods=['POST'])
 def add_product():
-	from database import Product, Supplier, Supplier_product
+	now=datetime.datetime.now()
+	stk_date=now.strftime("%Y-%m-%d")
+	from database import Product, Supplier, Supplier_product, Stock
 	#try:
 	
 	p_category = request.form['category']
@@ -345,7 +347,7 @@ def add_product():
 	gst = request.form['gst']
 	product_base_margin = request.form['base_margin']
 	p_sale_price = request.form['sale_price']
-	sid = request.form['suppplier']
+	sid = request.form['supplier']
 	
 	pid = Product.query.order_by(desc(Product.pid)).limit(1).all()
 	pid = pid[0]
@@ -357,15 +359,20 @@ def add_product():
 		
 		
 	#Create a product object to insert into the Product table
-	product = Product(pid, p_category, p_sub_category, p_name, p_price,product_base_margin, p_sale_price, sid)
+	#	def __init__(self, pid, p_category, p_sub_category, p_name, p_price, gst, product_base_margin, product_sale_price, supplier):
 	
 	#get supplier obj from database 
 	supp = Supplier.query.filter_by(sid = sid).first()
+	product = Product(pid, p_category, p_sub_category, p_name, p_price,gst,product_base_margin, p_sale_price, supp)
 	supplier_product = Supplier_product( product, supp)
-	
+
 	db.session.add(product)
 	db.session.add(supplier_product)
-	
+	#def __init__(self, date, product,  stocks_left, supplier):
+	prod= Product.query.filter_by(pid = pid).first()
+
+	stock=Stock(stk_date,prod,0,supp)
+	db.session.add(stock)
 	db.session.commit()
 		
 	return 'product record added successfully'
@@ -468,7 +475,7 @@ def get_details_of_bill():
 
 @app.route('/get_sales')#, methods=['GET'])		
 def get_sales():
-	
+
 	from database import Transactions, Product, Bills
 	
 	
