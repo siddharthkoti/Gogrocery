@@ -672,7 +672,7 @@ def get_tax_details_to_file():
 
 	#Tax collected after the last filled date
 	end_date = datetime.date.today() + datetime.timedelta(-1)
-
+	today_date = datetime.date.today()
 	if(end_date>next_file_date):
 		file=True
 	if(end_date>next_file_date+datetime.timedelta(20)):
@@ -680,7 +680,7 @@ def get_tax_details_to_file():
 
 
 
-	bills = Bills.query.filter(Bills.bill_date <= end_date).filter(Bills.bill_date >= last_filled_date).all()
+	bills = Bills.query.filter(Bills.bill_date <= today_date).filter(Bills.bill_date > last_filled_date).all()
 
 
 	return render_template('details_of_tax.html',file=file,overdue=overdue,next_file_date = next_file_date,last_filled = last_filled, bills = bills, last_filled_date = last_filled_date)

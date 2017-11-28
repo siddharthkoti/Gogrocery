@@ -1,39 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Deatils of the Tax</title>
+	<title>TAX Filings</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="static/js/add_product_page.js"></script> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script src="static/js/w3.js"></script>
 </head>
 <body>
+<div w3-include-html={{ url_for('header') }} ></div>
 
-	<p>Last Filed Tax Details are as follows :</p>
-	<table>	
+	<p><h3>Last Filed Tax Details are as follows :</h3></p>
+
+
+	<table class="table table-striped">	
+	<thead>
+      <tr>
+        <th>DETAILS</th>
+        <th>  </th>
+      </tr>
+    </thead>
+    <tbody>
 		<tr><td>Bill filing Date :</td><td>{{ last_filled_date }}</td></tr>
 		<tr><td>Bills taken into Consideration from :</td><td>{{ last_filled.start }}</td></tr>
 		<tr><td>Bills taken into Consideration till :</td><td>{{ last_filled.end }}</td></tr>
 		<tr><td>Total Amount Filed :</td><td>{{ last_filled.total_amt }}</td></tr>
 		<tr><td>NEXT filing Date :</td><td>{{ next_file_date }}</td></tr>
 
-
+	</tbody>
 	</table>
 
-	<div>Details of Bills from last Tax Filation Date which will be taken for next Filation: </div>
-	<table>
-		<tr><td>Bill No</td><td>Bill date</td> <td>Bill Amount</td> <td>GST Collected</td></tr>
+	<div><h3> Details of Bills from last Tax Filation Date which will be taken for next Filation: </h3></div>
+	<table class="table table-striped">
+	<thead>
+      <tr>
+        <th>Bill No</th>
+        <th>Bill date</th>
+        <th>Bill Amount</th>
+        <th>GST Collected</th>
+      </tr>
+    </thead>
+		<tbody>
 		{% for bill in bills %}	
 			<tr><td>{{bill.bill_no}}</td><td>{{bill.bill_date}}</td> <td>{{bill.bill_amt}}</td> <td>{{bill.gst}}</td></tr>
 		{% endfor %}
 
-		{% if file == False %}	
-			<tr><td>NOT  FILEABLE</td></tr>
-		{% endif%}
-		{% if overdue == True %}	
-			<tr><td>OVERDUE</td></tr>
-		{% endif%}
-
+		
+		</tbody>
 
 		
 	</table>
-	
+	{% if overdue == True %}	
+ 		 <center> <button type="button" class="btn btn-danger">File Taxes</button><br> <span> (Over Due)</span></center>
+	{% else %}
+		{% if  file == True %}
+			 <center><button type="button" class="btn btn-primary" onclick="location.href='{{ url_for('file_taxes') }}'">File Taxes</button>	</center> 
+		
+		{% else %}
+  		<center><button type="button" class="btn btn-primary disabled">File Taxes</button><br> <span> (Taxes already filed for the year)</span></center><br><br><br>
+		{% endif%}	
 
+	{% endif%}
+	
+<div w3-include-html={{ url_for('footer') }}></div>
+		<script>
+		w3.includeHTML();
+		</script>
 </body>
 </html>
