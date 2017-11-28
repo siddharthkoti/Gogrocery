@@ -606,6 +606,42 @@ def get_sales():
 	m3 = {i[0]: i[1] for i in m}
 	#op: {'p3' : 30, 'p2': 10}
 	
+	amount_list_per_day_weekly = []
+	quantity_list_per_day_weekly = []
+	for i in range(7):
+		date = datetime.date.today() + datetime.timedelta(-i)
+		half = Bills.query.filter(Bills.bill_date == date)#.all()
+		bills = half.all()
+		list_bill_no = [i.bill_no for i in bills]
+		amt = half.with_entities(func.sum(Bills.bill_amt)).group_by(Bills.bill_date).first() #op:(1125,)
+		if amt == None:
+			amt = 0
+		else:
+			amt = amt[0]
+		amount_list_per_day_weekly.append(amt)
+		
+		if len(list_bill_no) == 0:
+			quantity_list_per_day_weekly.append(0)
+		else:
+			quantity = Transactions.query.filter(Transactions.bill_no.in_(list_bill_no)).with_entities(func.sum(Transactions.quantity)).group_by(Transactions.bill_no).all()
+			total_q = 0
+			for i in quantity:
+				total_q += i[0]
+			quantity_list_per_day_weekly.append(total_q)
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	#---------------------------------------------------------------------
 	# pids = list(products)
 	
@@ -622,7 +658,7 @@ def get_sales():
 	categories = mid.with_entities(Product.p_category, func.sum(Transactions.quantity)).group_by(Product.p_category).all()
 	
 	#mid.with_entities(Product.p_category, func.sum(Transactions.quantity)).group_by(Product.p_category).all()
-	return render_template('sales_summary.html',monthly = monthly, yearly = yearly , weekly= weekly, m1 = m1, m2 = m2, m3 = m3, amount_list_per_day = amount_list_per_day, quantity_list_per_day = quantity_list_per_day, quantity_list_per_month = quantity_list_per_month, amount_list_per_month = amount_list_per_month, end_date = end_date)#, start_date = start_date,end_date = end_date, categories = categories, sub_categories = sub_categories)
+	return render_template('sales_summary.html',monthly = monthly, yearly = yearly , weekly= weekly, m1 = m1, m2 = m2, m3 = m3, amount_list_per_day = amount_list_per_day, quantity_list_per_day = quantity_list_per_day, quantity_list_per_month = quantity_list_per_month, amount_list_per_month = amount_list_per_month, end_date = end_date, amount_list_per_day_weekly=amount_list_per_day_weekly, quantity_list_per_day_weekly=quantity_list_per_day_weekly)#, start_date = start_date,end_date = end_date, categories = categories, sub_categories = sub_categories)
 
 @app.route('/get_tax_details_to_file')#, methods=['GET'])
 def get_tax_details_to_file():	

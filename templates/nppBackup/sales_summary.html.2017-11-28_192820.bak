@@ -312,7 +312,7 @@ chart_weekly_qty.render();
 					</div>
 				</div>
 			</div>			
-	 <div id="chartContainer_weekly_amt" style="height: 300px; width: 100%;"></div><br />
+	 <div id="chartContainer_weekly_amt" style="height: 300px; width: 100%;"></div>
 	 <div id="chartContainer_weekly_qty" style="height: 300px; width: 100%;"></div> 
     </div>
 	

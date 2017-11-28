@@ -248,24 +248,7 @@ var chart_weekly_amt = new CanvasJS.Chart("chartContainer_weekly_amt", {
 chart_weekly_amt.render();
 
 
-var chart_weekly_qty = new CanvasJS.Chart("chartContainer_weekly_qty", {
-	animationEnabled: true,
-	theme: "light2", // "light1", "light2", "dark1", "dark2"
-	title:{
-		text: "Last 7 days Sales in terms of Quantity"
-	},
-	axisY: {
-		title: "Quntity(in # of Units)"
-	},
-	data: [{        
-		type: "column",  
-		showInLegend: true, 
-		legendMarkerColor: "white",
-		legendText: "",
-		dataPoints: arr_qty_weekly 
-	}]
-});
-chart_weekly_qty.render();
+
 
 
 
@@ -311,9 +294,9 @@ chart_weekly_qty.render();
 						</div>																
 					</div>
 				</div>
-			</div>			
-	 <div id="chartContainer_weekly_amt" style="height: 300px; width: 100%;"></div><br />
-	 <div id="chartContainer_weekly_qty" style="height: 300px; width: 100%;"></div> 
+			</div> 
+	 <div id="chartContainer_weekly_amt" style="height: 300px; width: 100%;"></div>
+	  
     </div>
 	
 	
