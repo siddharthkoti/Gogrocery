@@ -11,7 +11,9 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-.navbar_fix{margin-bottom: 20px!important;}
+.navbar_fix{
+    margin-bottom: 20px!important;
+}
 
 
 html {
