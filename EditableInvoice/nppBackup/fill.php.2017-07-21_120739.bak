@@ -1,0 +1,6 @@
+<?php
+session_start();
+$dbcon=mysqli_connect("localhost","root","");
+mysqli_select_db($dbcon,"sales");
+
+$sql = "select cost,cgst,sgst from item";
