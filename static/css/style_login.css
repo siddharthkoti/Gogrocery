@@ -29,7 +29,7 @@ img{max-width:100%;}
 /*--end reset--*/
 body {
     font-family: 'Roboto', sans-serif;
-    background: url(../img/bg.jpg)no-repeat center;
+    background: url(../img/bg.jpg)center;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
