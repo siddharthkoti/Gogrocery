@@ -710,7 +710,7 @@ def file_taxes():
 	db.session.add(tax)
 	db.session.commit()
 	
-	return "Success"
+	return render_template('success_tax.html')
 
 @app.route('/add_user_page')
 def add_user_page():

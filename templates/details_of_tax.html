@@ -52,7 +52,7 @@
 		
 	</table>
 	{% if overdue == True %}	
- 		 <center> <button type="button" class="btn btn-danger">File Taxes</button><br> <span> (Over Due)</span></center>
+ 		 <center> <button type="button" class="btn btn-danger" onclick="location.href='{{ url_for('file_taxes') }}'">File Taxes</button><br> <span> (Over Due)</span></center>
 	{% else %}
 		{% if  file == True %}
 			 <center><button type="button" class="btn btn-primary" onclick="location.href='{{ url_for('file_taxes') }}'">File Taxes</button>	</center> 
