@@ -16,7 +16,11 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-		<li><a href="{{url_for('add_user_page')}}"><span class="glyphicon glyphicon-plus"></span> Add User</a></li>
+		
+      {% if username == 'Admin' %}
+    <li><a href="{{url_for('add_user_page')}}"><span class="glyphicon glyphicon-plus"></span> Add User</a></li>
+      {% endif %}
+
         <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
@@ -29,7 +33,7 @@
     <p></p>
   </div>
 </div>
-<<<<<<< HEAD
+
  <h1><div id="admin" class="text-muted">{% if username == "NO user logged In. Please Login!" %}
                                   <div>NO user logged In. Please Login!</div>
                                   {% else %}
@@ -38,6 +42,6 @@
 
  {% endif %}
 </div></h1>
-=======
- <h1><div id="admin" class="text-muted">Logged in as: {{ username }}</div></h1>
->>>>>>> 94a3090da4ca0abe4971f5d5b50726b2300c2910
+
+ 
+
