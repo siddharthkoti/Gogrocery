@@ -177,7 +177,7 @@ def bill_form_backend():
 	db.session.commit()
 	
 	print(products, qty, cgst, sgst, total)
-	return "success!"
+	return "success!" #to be updated without fail tomoro	
 	
 
 @app.route('/stock_add', methods = ['POST'])
@@ -304,12 +304,12 @@ def add_supplier():
 	s_number = request.form['mobile_no']
 	s_address = request.form['address']
 	
-	sid = Supplier.query.order_by(desc(Supplier.sid)).limit(1).all()
-	sid = sid[0]
-	sid = sid.sid 
-	prefix = sid[:1]
-	postfix = int(sid[1:])
-	postfix = postfix + 1
+	sids = Supplier.query.all()
+	sid_list = [k.sid for k in sids]
+	sid_list = [int(k[1:]) for k in sid_list]
+	sid_list.sort( reverse = True) 
+	prefix = 's'
+	postfix = sid_list[0] + 1
 	sid = prefix + str(postfix)
 		
 	#Create a Supplier object to insert into the Supplier table
@@ -338,35 +338,55 @@ def add_product():
 	from database import Product, Supplier, Supplier_product
 	#try:
 	
-	p_category = request.form['category']
-	p_sub_category = request.form['sub_category']
-	p_name = request.form['name']
-	p_price = request.form['price']
-	gst = request.form['gst']
-	product_base_margin = request.form['base_margin']
-	p_sale_price = request.form['sale_price']
-	sid = request.form['suppplier']
+	p_category = request.form.get('category')
 	
-	pid = Product.query.order_by(desc(Product.pid)).limit(1).all()
-	pid = pid[0]
-	pid = pid.pid 
-	prefix = pid[:1]
-	postfix = int(pid[1:])
-	postfix = postfix + 1
+	print(p_category)
+	
+	p_sub_category = request.form.get('sub_category')
+	print(p_sub_category)
+	
+	p_name = request.form['name']
+	print(p_name)
+	
+	p_price = request.form['price']
+	
+	print(p_price)
+	
+	gst = request.form['gst']
+	print(gst)
+	
+	product_base_margin = request.form['base_margin']
+	print(product_base_margin)
+	
+	p_sale_price = request.form['sale_price']
+	print("p_sale_price",p_sale_price)
+	
+	sid = request.form['supplier']
+	print(sid)
+	print("hello")
+	pids = Product.query.all()
+	pid_list = [k.pid for k in pids]
+	pid_list = [int(k[1:]) for k in pid_list]
+	pid_list.sort( reverse = True)
+	prefix = 'p'
+	postfix = pid_list[0] + 1
 	pid = prefix + str(postfix)
-		
+	
+	
+	
 		
 	#Create a product object to insert into the Product table
-	product = Product(pid, p_category, p_sub_category, p_name, p_price,product_base_margin, p_sale_price, sid)
+	supp = Supplier.query.filter_by(sid = sid).first()
+	product = Product(pid, p_category, p_sub_category, p_name, p_price, gst ,product_base_margin, p_sale_price, supp)
+	db.session.add(product)
 	
 	#get supplier obj from database 
-	supp = Supplier.query.filter_by(sid = sid).first()
+	
+	
 	supplier_product = Supplier_product( product, supp)
-	
-	db.session.add(product)
 	db.session.add(supplier_product)
-	
 	db.session.commit()
+	
 		
 	return 'product record added successfully'
 
