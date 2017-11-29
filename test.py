@@ -711,7 +711,10 @@ def file_taxes():
 	db.session.commit()
 	
 	return "Success"
-
+@app.route('/update_password')
+def update_password():
+	return render_template('update_password')
+	
 @app.route('/add_user_page')
 def add_user_page():
 	if 'user' in session and session['user'] == 'Admin':
