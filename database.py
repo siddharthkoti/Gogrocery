@@ -58,7 +58,7 @@ class Supplier(db.Model):
 
 		
 class Stock(db.Model):
-	date = db.Column(db.Date)
+	date = db.Column(db.Date, default = arrow.now().format('YYYY-MM-DD') )
 	pid = db.Column(db.String(10), db.ForeignKey('product.pid', ondelete = 'CASCADE'), primary_key = True)
 	#p_name = db.Column(db.String(25))
 	#p_price = db.Column(db.Integer)
@@ -67,8 +67,8 @@ class Stock(db.Model):
 	last_shipment_arrival = db.Column(db.Date, default = arrow.now().format('YYYY-MM-DD'))
 	
 	# p_name, p_price,
-	def __init__(self, date, product,  stocks_left, supplier):
-		self.date = date
+	def __init__(self, product,  stocks_left, supplier):
+		# self.date = date
 		self.product = product
 		#self.p_name = p_name
 		#self.p_price = p_price
