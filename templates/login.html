@@ -1,83 +1,173 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="EN">
 <head>
-<title>GoGrocery-Login</title>
+<title>GOGROCERIES LOGIN</title>
+<!-- custom-theme -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Order A Cake template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs Sign up Web Templates, 
- Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design">
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!-- Custom Theme files -->
-<link rel="stylesheet" type="text/css" href="static/css/easy-responsive-tabs.css " />
-<link href="static/css/style_login.css" rel='stylesheet' type='text/css' />
-<!--fonts--> 
-<link href="//fonts.googleapis.com/css?family=Playball" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!--//fonts--> 
+<meta name="keywords" content="Esteem Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //custom-theme -->
+<link href="static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="static/css/component.css" rel="stylesheet" type="text/css" media="all" />
+<link href="static/css/login.css" rel="stylesheet" type="text/css" media="all" />
+<!-- font-awesome-icons -->
+
+<!-- //font-awesome-icons -->
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
 </head>
 <body>
-<!-- login -->
-<div class="login-section">
-	<h1 style="color: white;font-size: 2.7em;font-style: 'Roboto Thin'"><strong> GoGrocery</strong> | <span style="font-style:'Roboto Thin';font-weight:100">Login</h1><br>
-	<h3 style="color: white;font-size: 1.2em;font-style: 'Roboto Thin'">Please Login to continue <i class="glyphicon glyphicon-thumbs-up"></i></h3><br>
-	<div class="container login-w3l">		
-		<div class="login-form">			
-			
-				<!-- <div class="clear"></div> -->
-			
-				<!--Horizontal Ta-->
-				<!-- <div id="parentHorizontalTab_agile"> -->
-					
-					<div class="resp-tabs-container">
-					   <div class="agile_its_registration">
-							<form action="{{ url_for('login') }}" method="post" class="agile_form">
-							  <input type="text" name="username" placeholder="Username" required="required" />	
-							  <!-- <input type="email" name="username" placeholder="Your email" required="required" /> -->
-							  <input type="password" name="password" placeholder="Password"  required="required" />
-							  <input type="submit" value="Login" class="agileinfo" />
-							</form>	
-						</div>
+<!-- banner -->
+<div class="wthree_agile_admin_info">
+		  <!-- /w3_agileits_top_nav-->
+		  <!-- /nav-->
+		  <div class="w3_agileits_top_nav">
+			<ul id="gn-menu" class="gn-menu-main">
 
-						</div>
-					</div>
-				<!-- </div> -->
-			 <!-- //Horizontal Tab -->
-		</div> 	
-	</div>	
+				<!-- //nav_agile_w3l -->
+                <li class="second logo admin"><h1><a href="main-page.html"><i class="fa fa-graduation-cap" aria-hidden="true"></i>GOGROCERIES</a></h1></li>
+				
+				<li>
+				</li>
+
+			</ul>
+			<!-- //nav -->
+			
+		</div>
+		<div class="clearfix"></div>
+		<!-- //w3_agileits_top_nav-->
+		
+		<!-- /inner_content-->
+				<div class="inner_content">
+				    <!-- /inner_content_w3_agile_info-->
+					<div class="inner_content_w3_agile_info">
+					
+
+							<div class="registration admin_agile">
+								
+												<div class="signin-form profile admin">
+													<h2>Login</h2>
+													<div class="login-form">
+														<form action="{{ url_for('login') }}" method="post" >
+															<input type="text" name="username" placeholder="username" required="">
+															<input type="password" name="password"  placeholder="Password" required="">
+															<div class="tp">
+																<input type="submit" value="LOGIN">
+															</div>
+															
+														</form>
+													</div>
+													
+
+													 
+												</div>
+
+					
+
+				    </div>
+					<!-- //inner_content_w3_agile_info-->
+				</div>
+		<!-- //inner_content-->
+	</div>
+<!-- banner -->
+<!--copy rights start here-->
+<div class="copyrights">
+	 <p>© 2017 All Rights Reserved <a target="_blank">GOGROCERIES</a> </p>
 </div>	
-<div class="agileits_w3layouts_copyright text-center">
-	<p></p>
-</div>
-		<!--js-->
-				<script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
-		<!--//js-->
-		<!--tabs-->
-		<script src="static/js/easyResponsiveTabs.js"></script>
-		<script type="text/javascript">
-		$(document).ready(function() {
-			//Horizontal Tab
-			$('#parentHorizontalTab_agile').easyResponsiveTabs({
-				type: 'default', //Types: default, vertical, accordion
-				width: 'auto', //auto or any width like 600px
-				fit: true, // 100% fit in a container
-				tabidentify: 'hor_1', // The tab groups identifier
-				activate: function(event) { // Callback function if tab is switched
-					var $tab = $(this);
-					var $info = $('#nested-tabInfo');
-					var $name = $('span', $info);
-					$name.text($tab.text());
-					$info.show();
+<!--copy rights end here-->
+<!-- js -->
+
+          <script type="text/javascript" src="static/js/jquery.min.js"></script>
+		  <script src="static/js/modernizr.custom.js"></script>
+		
+		   <script src="static/js/classie.js"></script>
+		  <script src="static/js/gnmenu.js"></script>
+		  <script>
+			new gnMenu( document.getElementById( 'gn-menu' ) );
+		 </script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>        
+			<script type="text/javascript">
+				google.maps.event.addDomListener(window, 'load', init);
+				function init() {
+					var mapOptions = {
+						zoom: 11,
+						center: new google.maps.LatLng(40.6700, -73.9400),
+						styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
+					};
+					var mapElement = document.getElementById('map');
+					var map = new google.maps.Map(mapElement, mapOptions);
+					var marker = new google.maps.Marker({
+						position: new google.maps.LatLng(40.6700, -73.9400),
+						map: map,
+					});
 				}
-			});
-		});
-		</script>
-		<!--//tabs-->
+			</script>
+			  <script src="static/js/prettymaps.js"></script>
+				<script>
+
+        $(function(){
+            //default
+            $('.map-canvas').prettyMaps({
+                address: 'Melbourne, Australia',
+                image: 'map-icon.png',
+                hue: '#FF0000',
+                saturation: -20
+            });
+
+            //red map example
+            $('#default-map-btn').on('click', function(){
+                $('.map-canvas').prettyMaps();
+            });
+
+            //green map example
+            $('#green-map-btn').on('click', function(){
+                $('.map-canvas').prettyMaps({
+                    address: 'Melbourne, Australia',
+                    image: 'map-icon.png',
+                    hue: '#00FF55',
+                    saturation: -30
+                });
+            });
+
+            //blue map example
+            $('#blue-map-btn').on('click', function(){
+                $('.map-canvas').prettyMaps({
+                    address: 'Melbourne, Australia',
+                    image: 'map-icon.png',
+                    hue: '#0073FF',
+                    saturation: -30,
+                    zoom: 16,
+                    panControl: true,
+                    zoomControl: true,
+                    mapTypeControl: true,
+                    scaleControl: true,
+                    streetViewControl: true,
+                    overviewMapControl: true,
+                    scrollwheel: false,
+                });
+            });
+            
+            //grey map example
+            $('#grey-map-btn').on('click', function(){
+                $('.map-canvas').prettyMaps({
+                    address: 'Melbourne, Australia',
+                    image: 'map-icon.png',
+                    saturation: -100,
+                    lightness: 10
+                });
+            });
+        });
+
+  </script>
+<!-- //js -->
+
+<script src="static/js/jquery.nicescroll.js"></script>
+<script src="static/js/scripts.js"></script>
+
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>
