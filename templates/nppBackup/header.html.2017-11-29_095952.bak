@@ -19,13 +19,13 @@
       <ul class="nav navbar-nav navbar-right">
 		
       {% if username == 'Admin' %}
-    <li><a href="{{url_for('add_user_page')}}"><span class="glyphicon glyphicon-plus"></span> Add User</a></li>
+    <li><a href="{{url_for('add_user_page')}}"><span class="glyphicon glyphicon-retweet"></span> Add User</a></li>
       {% endif %}
 
       {% if username == "NO user logged In. Please Login!" %}
         <li><a href="{{url_for('index')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       {% else %}
-		<li><a href="{{url_for('update_password')}}"><span class="glyphicon glyphicon-retweet"></span> Update Password</a></li>
+		<li><a href="{{url_for('update_password')}}"><span class="glyphicon glyphicon-log-in"></span> Update Password</a></li>
         <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       {% endif %}
       </ul>

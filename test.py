@@ -688,6 +688,9 @@ def get_tax_details_to_file():
 
 	return render_template('details_of_tax.html',file=file,overdue=overdue,next_file_date = next_file_date,last_filled = last_filled, bills = bills, last_filled_date = last_filled_date)
 	
+@app.route('/update_password')
+def update_password():
+	return render_template('update_password.html')
 	
 @app.route('/file_taxes')#, methods=['GET'])
 def file_taxes():
@@ -713,16 +716,10 @@ def file_taxes():
 	db.session.add(tax)
 	db.session.commit()
 	
-<<<<<<< HEAD
-	return "Success"
-@app.route('/update_password')
-def update_password():
-	return render_template('update_password')
-	
-=======
+
+
 	return render_template('success_tax.html')
 
->>>>>>> e5e89e0091d2cb79fc304722c82a3de389a1cd96
 @app.route('/add_user_page')
 def add_user_page():
 	if 'user' in session and session['user'] == 'Admin':
