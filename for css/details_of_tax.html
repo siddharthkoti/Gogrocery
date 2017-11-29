@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Deatils of the Tax</title>
+</head>
+<body>
+
+	<p>Last Filed Tax Details are as follows :</p>
+	<table>	
+		<tr><td>Bill filing Date :</td><td>{{ last_filled_date }}</td></tr>
+		<tr><td>Bills taken into Consideration from :</td><td>{{ last_filled.start }}</td></tr>
+		<tr><td>Bills taken into Consideration till :</td><td>{{ last_filled.end }}</td></tr>
+		<tr><td>Total Amount Filed :</td><td>{{ last_filled.total_amt }}</td></tr>
+
+	</table>
+	<table>
+		<tr><td>Bill No</td><td>Bill date</td> <td>Bill Amount</td> <td>GST Collected</td></tr>
+		
+		<tr><td>{{bill.bill_no}}</td><td>{{bill.bill_date}}</td> <td>{{bill.bill_amt}}</td> <td>{{bill.gst}}</td></tr>
+		<tr><td>{{bill.bill_no}}</td><td>{{bill.bill_date}}</td> <td>{{bill.bill_amt}}</td> <td>{{bill.gst}}</td></tr>
+		<tr><td>{{bill.bill_no}}</td><td>{{bill.bill_date}}</td> <td>{{bill.bill_amt}}</td> <td>{{bill.gst}}</td></tr>
+		<tr><td>{{bill.bill_no}}</td><td>{{bill.bill_date}}</td> <td>{{bill.bill_amt}}</td> <td>{{bill.gst}}</td></tr>
+		<tr><td>{{bill.bill_no}}</td><td>{{bill.bill_date}}</td> <td>{{bill.bill_amt}}</td> <td>{{bill.gst}}</td></tr>
+
+
+
+	</table>
+	
+
+</body>
+</html>

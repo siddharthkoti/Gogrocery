@@ -146,7 +146,10 @@ def signUpUser():
 
 @app.route('/bill_fill')
 def bill_form():
-	return render_template('bill_form.html')
+	from database import Bills
+	last_bill = Bills.query.order_by(desc(Bills.bill_no)).limit(1).first()
+	invoice_no = int(last_bill.bill_no) + 1
+	return render_template('bill_form.html', invoice_no = invoice_no)
 
 @app.route('/bill_fill_backend', methods = ['POST'])
 def bill_form_backend():
@@ -180,7 +183,7 @@ def bill_form_backend():
 	db.session.add(bill)
 	db.session.commit()
 	
-	print(products, qty, cgst, sgst, total)
+	# print(products, qty, cgst, sgst, total)
 	return render_template('success_bill_fill.html')
 	
 
@@ -373,9 +376,9 @@ def add_product():
 	db.session.add(product)
 	db.session.add(supplier_product)
 	#def __init__(self, date, product,  stocks_left, supplier):
-	prod= Product.query.filter_by(pid = pid).first()
+	prod = Product.query.filter_by(pid = pid).first()
 
-	stock=Stock(stk_date,prod,0,supp)
+	stock=Stock(prod,0,supp)
 	db.session.add(stock)
 	db.session.commit()
 		
@@ -710,11 +713,16 @@ def file_taxes():
 	db.session.add(tax)
 	db.session.commit()
 	
+<<<<<<< HEAD
 	return "Success"
 @app.route('/update_password')
 def update_password():
 	return render_template('update_password')
 	
+=======
+	return render_template('success_tax.html')
+
+>>>>>>> e5e89e0091d2cb79fc304722c82a3de389a1cd96
 @app.route('/add_user_page')
 def add_user_page():
 	if 'user' in session and session['user'] == 'Admin':
